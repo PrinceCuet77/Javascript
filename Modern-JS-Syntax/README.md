@@ -255,7 +255,7 @@ class Student {
   }
 }
 
-const student =  new Student('Prince', 10)
+const student = new Student('Prince', 10)
 student.exampleFunction()
 ```
 
@@ -310,3 +310,276 @@ console.log(result) // Output: [40, 50, 60]
 
 ---
 
+- Couldn't change main array
+- 1st parameter: +ve = start from front, -ve = start from end
+
+```js
+const number = [10, 20, 30, 40, 50, 60]
+
+const result = number.slice(1, 3)
+console.log(result) // Output: [20, 30]
+
+// [10, 20, 30, 40, 50, 60]
+//      ^   ^
+//      1   3
+//     1st 2nd
+
+const result2 = number.slice(-2, 5)
+console.log(result2) // Output: [50]
+
+// [10, 20, 30, 40, 50, 60]
+//                  ^
+//                 -2 - 1st
+//                  5 - 2nd
+```
+
+## `splice()` Method
+
+- Change the main array
+- 1st parameter: +ve = start from front, -ve = start from end
+- 2nd parameter: how many element I want to remove
+- Rest parameters: Which elements I want to replace
+- Returns an array contains removed elements
+
+```js
+const number = [10, 20, 30, 40, 50, 60]
+
+const result = number.splice(1, 2, 100, 200, 300)
+console.log(result) // Output: [20, 30]
+console.log(number) // Output: [10, 100, 200, 300, 40,  50,  60]
+
+// [10, 20, 30, 40, 50, 60]
+//      ^
+//      1
+//     1st
+//     ^-----^
+//       2nd
+//     100, 200, 300
+//     Rest parameters
+
+const number1 = [10, 20, 30, 40, 50, 60]
+const result1 = number1.splice(-2, 5, 100, 200)
+console.log(result1) // Output: [50, 60]
+console.log(number1) // Output: [10, 20, 30, 40, 100, 200]
+
+// [10, 20, 30, 40, 50, 60]
+//                  ^
+//                 -2
+//                 1st
+//                 ^-----^
+//                   2nd
+//                 100, 200, 300
+//                 Rest parameters
+```
+
+## `concat()` Method
+
+---
+
+- Couldn't change the main array
+- Returns new array which contains all the elements
+- I can concatenation multiple array
+
+```js
+const number1 = [1, 2, 3]
+const number2 = [10, 20, 30]
+const number3 = [100, 200, 300]
+
+const result = number1.concat(number2)
+console.log(result) // Output: [1, 2, 3, 10, 20, 30]
+
+const result2 = number1.concat(number2, number3)
+console.log(result2) // Output: [1, 2, 3, 10, 20, 30, 100, 200, 300]
+```
+
+## `push()` Method
+
+---
+
+- Modify the array
+- Returns the new length of the modified array
+
+```js
+const numbers = [1, 2, 3, 4, 5]
+
+let result = numbers.push(10)
+console.log(numbers) // Output: [1, 2, 3, 4, 5, 10]
+console.log(result) // Output: 6
+
+result = numbers.push(10, 11, 12)
+console.log(numbers) // Output: [1, 2, 3, 4, 5, 10, 10, 11, 12]
+console.log(result) // Output: 9
+
+result = numbers.push([100, 200])
+console.log(numbers) // Output: [1, 2, 3, 4, 5, 10, 10, 11, 12, [100, 200]]
+console.log(result) // Output: 10
+```
+
+## `map()` Method
+
+---
+
+- Couldn't change the main array
+- Must return all the elements inside the arrow function
+- Used to traverse the array
+
+```js
+const numbers = [10, 20, 30, 40]
+
+const result = numbers.map((num) => {
+  return 2 * num
+})
+
+console.log(result) // Output: [20, 40, 60, 80]
+console.log(numbers) // Output: [10, 20, 30, 40]
+```
+
+## `reduce()` Method
+
+- Couldn't change the main array
+- 1st parameter: previously returned value
+- 2nd parameter: current value
+- 3rd parameter: index of the current value
+- 4th parameter: takes the whole array
+
+```js
+const numbers = [1, 2, 3, 4, 5]
+
+const sum = numbers.reduce((prev, current) => {
+  return prev + current
+})
+
+console.log(sum) // Output: 15
+```
+
+## `for in` loop
+
+---
+
+- Iterates an object, array and string
+- Receive the propery for object & index for array and string
+
+```js
+// Object
+const myObj = {
+  name: 'Javascript',
+  estd: '1995',
+  founder: 'Brendan Eich',
+}
+for (property in myObj) {
+  console.log(`Property: ${property}, and Value: ${myObj[property]}`)
+}
+
+// Array
+const myArray = [10, 20, 30, 40, 50]
+for (value in myArray) {
+  console.log(value)
+}
+
+// String
+const str = 'Prince'
+for (ch in str) {
+  console.log(ch)
+}
+```
+
+- Output:
+
+```text
+// For Object
+Property: name, and Value: Javascript
+Property: estd, and Value: 1995
+Property: founder, and Value: Brendan Eich
+
+// For Array
+0 1 2 3 4
+
+// For String
+0 1 2 3 4 5
+```
+
+- Iterates only array and string
+
+```js
+// Array
+const myArray = [10, 20, 30, 40, 50]
+
+for (value of myArray) {
+  console.log(value)
+}
+
+// String
+const str = 'Prince'
+for (ch of str) {
+  console.log(ch)
+}
+```
+
+- Output:
+
+```text
+// For Array
+10 20 30 40 50
+
+// For String
+P r i n c e
+```
+
+## Important Object Tricks
+
+---
+
+- `Object.keys()` returns the keys or properties in the form of an array
+- `Object.values()` returns the values in the form of an array
+- `Object.entries()` returns the keys and values in the form of an 2d array
+
+```js
+const myObj = {
+  name: 'Javascript',
+  estd: '1995',
+  founder: 'Brendan Eich',
+}
+
+const keys = Object.keys(myObj)
+console.log(keys) // Output: [ 'name', 'estd', 'founder' ]
+
+const values = Object.values(myObj)
+console.log(values) // Output: [ 'Javascript', '1995', 'Brendan Eich' ]
+
+const entries = Object.entries(myObj)
+console.log(entries)
+
+// Output
+// [
+//   [ 'name', 'Javascript' ],
+//   [ 'estd', '1995' ],
+//   [ 'founder', 'Brendan Eich' ]
+// ]
+```
+
+## Default Parameter
+
+---
+
+- Set a default value at the last parameter of the function
+- If I don't provide any value then use default parameter
+- If I provide the value then apply that provided value
+
+```js
+function greeting(name, message = 'Good Morning!') {
+  console.log(`Hello ${name}, ${message}`)
+}
+
+greeting('Prince') // Output: Hello Prince, Good Morning!
+greeting('Prince', 'Good Afternoon!') // Output: Hello Prince, Good Afternoon!
+```
+
+## Spread Operator
+
+---
+
+-
+
+```js
+
+```
