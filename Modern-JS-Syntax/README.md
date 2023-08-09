@@ -717,3 +717,146 @@ function myFunc(a, ...params) {
 
 myFunc(1, 2, 3, 4, 5)
 ```
+
+## Object Destructuring
+
+- Fetching the value of a property of an object
+
+```js
+const user = {
+  id: '123',
+  name: 'Prince',
+  age: 23,
+}
+
+const name = user.name
+console.log(name) // Output: Prince
+
+// Alternative way
+const name1 = user['name']
+console.log(name1) // Output: Prince
+```
+
+- While using nested object, then will face problems
+- Need to use object destructuring
+- Basically fetching the property's value from that object
+- Store that value to any variable
+
+```js
+const user = {
+  id: '123',
+  name: 'Prince',
+  age: 23,
+}
+
+const { name } = user
+console.log(name) // Output: Prince
+```
+
+- Using alias
+
+```js
+const user = {
+  id: '123',
+  name: 'Prince',
+  age: 23,
+}
+
+const { name: title } = user
+console.log(title) // Output: Prince
+```
+
+- Use object destructuring in nested object
+
+```js
+const user = {
+  id: '123',
+  name: 'Prince',
+  age: 23,
+  education: {
+    degree: 'Masters',
+  },
+}
+
+const {
+  education: { degree },
+} = user
+
+console.log(degree) // Output: Masters
+```
+
+- Using alias in nested object
+
+```js
+const user = {
+  id: '123',
+  name: 'Prince',
+  age: 23,
+  education: {
+    degree: 'Masters',
+  },
+}
+
+const {
+  education: { degree: deg },
+} = user
+
+console.log(deg) // Output: Masters
+```
+
+- If `eduction` object is not present, then the last program shows error
+- To remove the error (if not found out `eduction` object), use default value
+
+```js
+const user = {
+  id: '123',
+  name: 'Prince',
+  age: 23,
+}
+
+const { education: { degree } = {} } = user
+
+console.log(degree) // Output: undefined
+```
+
+## Array Destructuring
+
+- Fetching the elements of an array
+
+```js
+const numbers = [1, 2, 4, 5, 6]
+
+const [a, b] = numbers
+
+console.log(a) // Output: 1
+console.log(b) // Output: 2
+```
+
+- Skip some elements of an array
+- For example, fetching 2nd & 5th elements
+
+```js
+const numbers = [1, 2, 4, 5, 6]
+
+const [, a, , , b] = numbers
+
+console.log(a) // Output: 2
+console.log(b) // Output: 6
+```
+
+- In nested array
+
+```js
+const numbers = [1, 2, [100, 200, 300, 400], 4, 5, 6]
+
+const [, , [, a, b]] = numbers
+
+console.log(a) // Output: 200
+console.log(b) // Output: 300
+```
+
+- Usecase: swapping two values without array destructuring
+
+```js
+
+```
