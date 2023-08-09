@@ -557,6 +557,35 @@ console.log(entries)
 // ]
 ```
 
+- If property and assigned variable both are same named as same, then I can shorten the property name like -
+
+```js
+const x = 10
+const y = 15
+
+const myObj = {
+  name: 'Javascript',
+  estd: '1995',
+  founder: 'Brendan Eich',
+  x,
+  y,
+}
+
+console.log(myObj)
+```
+
+- Output:
+
+```text
+{
+  name: 'Javascript',
+  estd: '1995',
+  founder: 'Brendan Eich',
+  x: 10,
+  y: 15
+}
+```
+
 ## Default Parameter
 
 ---
@@ -578,8 +607,113 @@ greeting('Prince', 'Good Afternoon!') // Output: Hello Prince, Good Afternoon!
 
 ---
 
--
+- Couldn't modify the main array
+- Make a copy and add to the new array
 
 ```js
+const number = [1, 2, 3]
 
+const newNumber = [...number, 10, 20]
+console.log(number) // Output: [1, 2, 3]
+console.log(newNumber) // Output: [1, 2, 3, 10, 20]
+```
+
+- If I modify the main array, It won't modify the new one and vice versa
+
+```js
+const number = [1, 2, 3]
+const newNumber = [...number, 10, 20]
+
+number.push(100) // Add a new element
+
+console.log(number) // Output: [1, 2, 3, 100]
+console.log(newNumber) // Output: [1, 2, 3, 10, 20]
+```
+
+- Multiple spread operators in a single array
+
+```js
+const number = [1, 2, 3]
+const number2 = [11, 22, 33]
+
+const newNumber = [...number, 100, 200, ...number2]
+
+console.log(newNumber) // Output: [1, 2, 3, 100, 200, 11, 22, 33]
+```
+
+- Spread operator in an object
+
+```js
+const person = {
+  name: 'Prince',
+  age: 22,
+}
+
+const newPerson = { ...person, position: 'Software Engineer', salary: '15k' }
+
+console.log(newPerson)
+```
+
+- Output:
+
+```text
+{
+  name: 'Prince',
+  age: 22,
+  position: 'Software Engineer',
+  salary: '15k'
+}
+```
+
+- If I assign, not to take as copy but as a reference
+
+```js
+const numbers = [1, 2, 3]
+
+const newNumber = numbers
+
+console.log(numbers) // Output: [1, 2, 3]
+console.log(newNumber) // Output: [1, 2, 3]
+
+numbers[0] = 100
+
+console.log(numbers) // Output: [100, 2, 3]
+console.log(newNumber) // Output: [100, 2, 3]
+```
+
+## Rest Operator
+
+---
+
+- Must be last argument in the funciton parameter
+- Received all the elements in the function
+
+```js
+function myFunc() {
+  console.log(arguments) // Output: [Arguments] { '0': 1, '1': 2, '2': 3, '3': 4, '4': 5 }
+  console.log(arguments[0]) // Output: 1
+}
+
+myFunc(1, 2, 3, 4, 5)
+```
+
+- Grabs all the parameters in the funciton
+
+```js
+function myFunc(...params) {
+  console.log(params) // Output: [1, 2, 3, 4, 5]
+}
+
+myFunc(1, 2, 3, 4, 5)
+```
+
+- Grabs a few parameters in the function
+
+```js
+function myFunc(a, ...params) {
+  console.log(a) // Output: 1
+  console.log(params) // Output: [2, 3, 4, 5]
+}
+
+myFunc(1, 2, 3, 4, 5)
 ```
