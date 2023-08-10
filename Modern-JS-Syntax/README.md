@@ -855,8 +855,156 @@ console.log(a) // Output: 200
 console.log(b) // Output: 300
 ```
 
-- Usecase: swapping two values without array destructuring
+## Import / Export
+
+- Need to create `package.json` file for supporting import and export
+- In `package.json` file -
 
 ```js
-
+{
+  "type": "module"
+}
 ```
+
+### Named Export
+
+- Export multiple values or functions
+- Exported variable or function name must match when importing
+- In `first.js` file -
+
+```js
+export const pi = 3.14
+export const a = 2.9
+
+export function greeting() {
+  console.log('Good morning...')
+}
+```
+
+### Named Import
+
+- Importing all values and functions
+- Import values or function inside `{}`
+- In `second.js` file -
+
+```js
+import { a, pi, greeting } from './first.js'
+
+console.log(a, pi) // Output: 2.9 3.14
+greeting() // Output: Good morning...
+```
+
+- Using `*` alias to catch multiple named imported value
+
+```js
+import * as value from './first.js'
+
+// Stored all imported variables and funcitons in 'value' object
+console.log(value)
+
+// Output:
+// [Module: null prototype] {
+//   a: 2.9,
+//   greeting: [Function: greeting],
+//   pi: 3.14
+// }
+
+// Calling imported (named) variables
+console.log(value.a, value.pi) // Output: 2.9 3.14
+
+// Calling imported (named) function
+value.greeting() // Output: Good morning...
+```
+
+- Using single single aliases to catch multiple named imported value
+
+```js
+import { a as newA, pi as newPi, greeting as newGreeting } from './first.js'
+
+// Calling imported (named) variables
+console.log(newA, newPi) // Output: 2.9 3.14
+
+// Calling imported (named) function
+newGreeting() // Output: Good morning...
+```
+
+### Default Export
+
+- Can't use multiple default export
+- May not match exported variable or function while importing
+- Variable export (default)
+- In `first.js` file -
+
+```js
+const a = 2.9
+export default a
+```
+
+- Function export (default)
+
+```js
+function greeting() {
+  console.log('Good morning...')
+}
+export default greeting
+```
+
+- Another way to use default export for function
+
+```js
+export default function greeting() {
+  console.log('Good morning...')
+}
+```
+
+- But while using arrow function, then use like exporting a varialbe
+
+```js
+const greeting = () => {
+  console.log('Good morning...')
+}
+
+export default greeting
+```
+
+### Default Import
+
+- Importing the value which is passed to other file using default export
+- In `second.js` file -
+
+```js
+import aa from './first.js'
+
+console.log(aa) // Output: 2.9
+```
+
+- Importing the function which is passed to other file using default export
+- In `second.js` file -
+
+```js
+import anotherGreeting from './first.js'
+
+anotherGreeting() // Output: Good morning...
+```
+
+- Default import/export & named import/export together
+- In `first.js` file -
+
+```js
+export const pi = 3.14
+
+const a = 2.9
+export default a
+```
+
+- In `second.js` file -
+
+```js
+import a, { pi } from './first.js'
+
+console.log(a, pi)
+```
+
+## Template Literals
+
+- 
