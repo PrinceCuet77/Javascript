@@ -498,7 +498,8 @@ Property: founder, and Value: Brendan Eich
 0 1 2 3 4 5
 ```
 
-- Iterates only array and string
+- Iterates only an array and string
+- Return the value of an array and the element of the string
 
 ```js
 // Array
@@ -1007,4 +1008,61 @@ console.log(a, pi)
 
 ## Template Literals
 
-- 
+- normal or problematic way
+
+```js
+const a = 5
+const b = 6
+
+console.log('I am ' + a + ' and I am ' + b) // Output: I am 5 and I am 6
+```
+
+- Using template literals
+
+```js
+const a = 5
+const b = 6
+
+console.log(`I am ${a} and I am ${b}`) // Output: I am 5 and I am 6
+```
+
+- Conduct arithmetic operation
+
+```js
+console.log(`I am ${a + b}`) // Output: I am 11
+```
+
+- Approve multi-line indentation
+
+```js
+console.log(`I am test 
+
+        This is test`)
+// Output:
+// I am test
+
+//         This is test
+```
+
+## Tagged Template Literals
+
+- Basically modify the template literals as per requirements
+
+```js
+function modifier(strings, ...values) {
+  console.log(strings) // Output: [ 'We have ', ' and ', ' in our cricket team.' ]
+  console.log(values) // Output: [ 'Sakib', 'Tamim' ]
+
+  const newStrings = strings.reduce((prev, current) => {
+    return prev + current + (values.length ? `Mr. ${values.shift()}` : '')
+  }, '')
+
+  return newStrings
+}
+
+const player1 = 'Sakib'
+const player2 = 'Tamim'
+
+console.log(modifier`We have ${player1} and ${player2} in our cricket team.`) // Output: We have Mr. Sakib and Mr. Tamim in our cricket team.
+```
+
