@@ -1066,3 +1066,154 @@ const player2 = 'Tamim'
 console.log(modifier`We have ${player1} and ${player2} in our cricket team.`) // Output: We have Mr. Sakib and Mr. Tamim in our cricket team.
 ```
 
+## Sets
+
+- `Set` is reference data type
+- `Set` is not same as an array
+- Stores unique data
+- `Set` area created with `new` keyword
+
+```js
+const myArray = [] //  Literal syntax
+const myArray2 = new Array() // Constructor syntax
+
+let mySet = new Set()
+console.log(mySet) // Output: Set(0) {}
+```
+
+- Any data can be added into `Set`
+
+```js
+// Insert an element
+mySet.add(10)
+mySet.add('Bangladesh')
+
+console.log(mySet) // Output: Set(2) { 10, 'Bangladesh' }
+```
+
+- Delete data from `set` element
+
+```js
+mySet.delete('Bangladesh')
+
+console.log(mySet) // Output: Set(2) { 10 }
+```
+
+- Check an element is present or not in `Set`
+
+```js
+console.log(mySet.has('Bangladesh')) // Output: false
+```
+
+- We can do method chaining with `Set` methods
+- Because the methods are returning the modified `Set`
+
+```js
+mySet.add(5).add(6).add('Bangladesh').delete(5)
+
+console.log(mySet) // Output: Set(2) { 6, 'Bangladesh' }
+```
+
+- Clears all the elements
+
+```js
+mySet.add(5).add(6).add('Bangladesh').clear()
+
+console.log(mySet) // Output: Set(0) {}
+```
+
+- Returns the length of the `Set`
+
+```js
+mySet.add(5).add(6).add('Bangladesh')
+
+console.log(mySet.size) // 3
+```
+
+- We can pass any iterable in `Set`
+- First iterable - `Array`
+- Create `Set` from `Array`:
+
+```js
+let myArray = [1, 2, 4, 4, 1, 3]
+let mySet = new Set(myArray)
+
+// Store only unique values
+console.log(mySet) // Output: Set(4) { 1, 2, 4, 3 }
+```
+
+- First iterable - `String`
+- Create `Set` from `String`:
+
+```js
+let mySet = new Set('ABCCB')
+
+console.log(mySet) // Output: Set(3) { 'A', 'B', 'C' }
+```
+
+- `Set` is iterable
+
+```js
+let mySet = new Set('ABCCB')
+
+for (let value of mySet) {
+  console.log(value)
+}
+
+// Output:
+// A
+// B
+// C
+```
+
+- Different between `Set` and `Array` is 
+- `Set` stores unique value, but `Array` stores repeated value
+- `Set` is not maintaining order, but `Array` maintains order
+- Create `Array` from `Set`:
+
+```js
+let mySet = new Set('ABCCB')
+
+// Method 1 (Recommended - easy to use)
+console.log([...mySet]) // Output: [ 'A', 'B', 'C' ]
+
+// Method 2
+console.log(Array.from(mySet)) // Output: [ 'A', 'B', 'C' ]
+```
+
+- Conduct any operation in `Set`:
+- Step 1: Convert `Array` from `Set`
+- Step 2: Conduct operation
+- Step 3: Convert `Set` from `Array` again
+- Usage:
+- `Set` is used to get unique elements from an array
+
+```js
+let myArray = [1, 2, 3, 4, 5, 5, 5, 5, 6, 5]
+
+console.log([...new Set(myArray)]) // Output: [ 1, 2, 3, 4, 5, 6 ]
+```
+
+- Union, Intersection, Difference
+
+```js
+const a = new Set([1, 2, 3])
+const b = new Set([1, 3, 5])
+
+const union = new Set([...a], [...b])
+console.log(union) // Output: Set(3) { 1, 2, 3 }
+
+const intersection = new Set([...a].filter((x) => b.has(x)))
+console.log(intersection) // Output: Set(3) { 1, 3 }
+
+const difference = new Set([...a].filter((x) => !b.has(x)))
+console.log(difference) // Output: Set(1) { 2 }
+```
+
+## WeakSet
+
+- We must add object to `WeakSet`
+
+```js
+
+```
