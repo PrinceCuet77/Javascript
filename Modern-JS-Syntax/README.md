@@ -1166,7 +1166,7 @@ for (let value of mySet) {
 // C
 ```
 
-- Different between `Set` and `Array` is 
+- Different between `Set` and `Array` is
 - `Set` stores unique value, but `Array` stores repeated value
 - `Set` is not maintaining order, but `Array` maintains order
 - Create `Array` from `Set`:
@@ -1213,7 +1213,55 @@ console.log(difference) // Output: Set(1) { 2 }
 ## WeakSet
 
 - We must add object to `WeakSet`
+- Available methods: `add`, `delete` & `has`
 
 ```js
+// Array of object
+const ws = new WeakSet([{ a: 1 }, { b: 2 }])
+```
 
+- Add an element
+
+```js
+ws.add({ a: 1 })
+```
+
+- `WeakSet` are not iterables
+- Usage:
+- I can access any methods of class using `prototype`
+
+```js
+class someClass {
+  constructor() {}
+
+  method() {
+    console.log('This method can be accessed')
+  }
+}
+
+someClass.prototype.method() // Output: This method can be accessed
+```
+
+- But it should not be accessed
+- Using `WeakSet`, force to create an object to access its method
+
+```js
+const ws = new WeakSet()
+
+class someClass {
+  constructor() {
+    ws.add(this)
+  }
+
+  method() {
+    if (!ws.has(this)) {
+      throw new Error('Can not be accessed')
+    }
+
+    console.log('This method can be accessed')
+  }
+}
+
+const sc = new someClass()
+sc.method() // Output: This method can be accessed
 ```
