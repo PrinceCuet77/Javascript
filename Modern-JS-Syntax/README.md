@@ -1265,3 +1265,93 @@ class someClass {
 const sc = new someClass()
 sc.method() // Output: This method can be accessed
 ```
+
+## `copyWithin()` Method
+
+- Copy all the elements from `start` to `end` and replace it at `target`
+- `target`, `start` & `end` are array index or position
+- if `target`, `start` & `end` are +ve's
+- Takes the range I want to copy
+
+![1](photo/1.png)
+
+- Find the target position
+
+![2](photo/2.png)
+
+- Mark the array position where I want to replace
+
+![3](photo/3.png)
+
+- Replace with the element
+
+![4](photo/4.png)
+
+- if `target`, `start` & `end` are -ve's
+- Must: `start < end`
+
+![5](photo/5.png)
+
+- Takes the range I want to copy
+- Find the target position
+- Mark the array position where I want to replace
+
+![6](photo/6.png)
+
+- Replace with the element
+
+![7](photo/7.png)
+
+- This method has 6 properties
+  - `target` is required
+  - `start` defaults to `0`
+  - `end` defaults to `array.length`
+  - Never changes `array.length`
+  - Overwrites original `array`
+  - Returns modified `array`
+- Examples: 01 -> `end` is absent
+
+```js
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+
+a.copyWithin(3, 2)
+console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'Python', 'Ruby', 'C++' ]
+```
+
+- Examples: 02 -> `target` is out of the `array.length`
+
+```js
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+
+a.copyWithin(6, 1, 2)
+console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST' ]
+```
+
+- Examples: 03 -> `start` and `end` are absent
+
+```js
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+
+a.copyWithin(3)
+console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'JavaScript', 'PHP', 'Python' ]
+```
+
+- Examples: 04 -> `start > end`, so no copy
+
+```js
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+
+a.copyWithin(3, -1, -2)
+console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST' ]
+```
+
+- Examples: 05 -> Now `start < end`
+
+```js
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+
+a.copyWithin(3, -2, -1)
+console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'C++', 'C++', 'RUST' ]
+```
+
+- 
