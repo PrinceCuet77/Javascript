@@ -54,3 +54,28 @@ const company5 =
   language.library.react.company
 
 console.log(company4) // Output: undefined
+
+// More efficient way
+const company6 = language?.library?.react?.company
+console.log(company6) // Output: Facebook
+
+const company7 = language?.library?.react?.company1
+console.log(company7) // Output: undefined
+
+// Array
+const colors = ['red', null, 'green', 'blue']
+console.log(colors?.[1]) // Output: null
+console.log(colors?.[0]) // Output: red
+
+let planguage = NaN
+console.log(planguage ?? 'JavaScript') // Output: NaN
+console.log(planguage || 'JavaScript') // Output: JavaScript
+
+// IIFE
+(async function() {
+  const { add } = await import('./24.1.utils.js');
+  const { remove } = await import('./24.1.utils.js');
+
+  add()
+  remove()
+})()
