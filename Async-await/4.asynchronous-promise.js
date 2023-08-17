@@ -27,30 +27,3 @@ const waiterFree = () => {
   log(`Waiter is free for taking next order from any customer`)
 }
 
-// let customer = 'Customer 1'
-// takeOrder(customer, () => {
-//   processOrder(customer, 5000, () => {
-//     waiterFree()
-//   })
-// })
-
-// customer = 'customer 2'
-// takeOrder(customer, () => {
-//   processOrder(customer, 3000, () => {
-//     waiterFree()
-//   })
-// })
-
-let customer = 'Customer 1'
-takeOrder(customer, () => {
-  processOrder(customer, 5000, () => {
-    waiterFree()
-
-    customer = 'customer 2'
-    takeOrder(customer, () => {
-      processOrder(customer, 3000, () => {
-        waiterFree()
-      })
-    })
-  })
-})
