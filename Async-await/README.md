@@ -1,4 +1,87 @@
-# Async Await
+# Async Await in JavaScript
+
+## Callbacks
+
+- A callback is a funtion passed as an argument to another function
+- This technique allows a function to call another function
+- A callback function call run after another function has finished
+- Normal function -
+
+```js
+const display = (sum) => {
+  console.log(`The result is : ${sum}`)
+}
+
+const calculate = (value1, value2) => {
+  const sum = value1 + value2
+  return sum
+}
+
+const result = calculate(4, 5)
+display(result) // Output: The result is : 9
+```
+
+- Using callback function
+
+```js
+const display = (sum) => {
+  console.log(`The result is : ${sum}`)
+}
+
+const calculate = (value1, value2, callback) => {
+  const sum = value1 + value2
+
+  if (callback) callback(sum)
+}
+
+calculate(4, 5, display) // Output: The result is : 9
+```
+
+- Using callback function as anonymous function
+
+```js
+const calculate = (value1, value2, callback) => {
+  const sum = value1 + value2
+
+  if (callback) callback(sum)
+}
+
+calculate(4, 5, function (sum) {
+  console.log(`The result is : ${sum}`)
+}) // Output: The result is : 9
+```
+
+- So, `callback` argument is pointing the following anonymous function
+
+```js
+function (sum) {
+  console.log(`The result is : ${sum}`)
+}
+```
+
+- Using callback function as arrow function
+
+```js
+const calculate = (value1, value2, callback) => {
+  const sum = value1 + value2
+
+  if (callback) callback(sum)
+}
+
+calculate(4, 5, (sum) => {
+  console.log(`The result is : ${sum}`)
+}) // Output: The result is : 9
+```
+
+- So, `callback` argument is pointing the following arrow function
+
+```js
+;(sum) => {
+  console.log(`The result is : ${sum}`)
+}
+```
+
+## Synchronous Behavior
 
 - JavaScript works synchronously
 - Doing a lot of work at the same time
@@ -91,6 +174,8 @@ The food is ready and served to the customer 2
 Complete the order for customer 2
 ```
 
+## Asynchronous Behavior
+
 - Same functionality in JavaScript implementation of Asynchronous Behavior
 
 ```js
@@ -125,7 +210,7 @@ processOrder(customer, 3000)
 log(`Waiter is free for taking next order from any customer`)
 ```
 
-- Outcome - 
+- Outcome -
 
 ```text
 Take order from Customer 1
@@ -149,17 +234,241 @@ The food is ready and served to the Customer 1
 - Now, Asynchronous Behavior implementation using JavaScript callback feature
 
 ```js
+// Printing the log
+const log = (anything) => {
+  console.log(anything)
+}
 
+const processOrder = (customer, orderTime, callback) => {
+  log(`Move to kitchen and describe the order to chief for ${customer}`)
+
+  // Asynchronous function
+  setTimeout(() => {
+    log(`The food is ready and served to the ${customer}`)
+  }, orderTime)
+
+  log(
+    `Complete the order for ${customer} and ${customer} needs to wait ${orderTime} seconds`
+  )
+
+  callback()
+}
+
+const takeOrder = (customer, callback) => {
+  log(`Take order from ${customer}`)
+  callback()
+}
+
+const waiterFree = () => {
+  log(`Waiter is free for taking next order from any customer`)
+}
+
+// First callback pattern
+let customer = 'Customer 1'
+takeOrder(customer, () => {
+  processOrder(customer, 5000, () => {
+    waiterFree()
+  })
+})
+
+// Second callback pattern
+customer = 'customer 2'
+takeOrder(customer, () => {
+  processOrder(customer, 3000, () => {
+    waiterFree()
+  })
+})
 ```
 
-- Outcome - 
+- Outcome -
 
 ```text
+Take order from Customer 1
+Move to kitchen and describe the order to chief for Customer 1
+Complete the order for Customer 1 and Customer 1 needs to wait 5000 seconds
+Waiter is free for taking next order from any customer
+Take order from customer 2
+Move to kitchen and describe the order to chief for customer 2
+Complete the order for customer 2 and customer 2 needs to wait 3000 seconds
+Waiter is free for taking next order from any customer
 
+(--- 3 seconds pause ---)
+
+The food is ready and served to the customer 2
+
+(--- 2 seconds pause ---)
+
+The food is ready and served to the Customer 1
 ```
+
+- Another way to use callback pattern
+
+```js
+let customer = 'Customer 1'
+takeOrder(customer, () => {
+  processOrder(customer, 5000, () => {
+    waiterFree()
+
+    customer = 'customer 2'
+    takeOrder(customer, () => {
+      processOrder(customer, 3000, () => {
+        waiterFree()
+      })
+    })
+  })
+})
+```
+
+- Output will be the same
+
+## Promise
 
 - The previous example creates callback hell
 - To get rid of it, need to use `Promise` feature of JavaScript
-- The concept is - 
+- The syntax of `Promise` - 
+
+```js
+const meeting = new Promise((resolve, reject) => {
+  if (!hasMeeting) {
+    const meetingDetails = {
+      name: 'An JavaScript Interview Session',
+      duration: '2 hours',
+      time: '10:30 PM',
+    }
+
+    resolve(meetingDetails)
+  } else {
+    reject(new Error('A meeting has already scheduled'))
+  }
+})
+```
+
+- If only `resolve` is present in a `Promise`, then write like -
+
+```js
+const promise = Promise.resolve(123)
+
+promise.then((res) => {
+  console.log(res) // Output: 123
+})
+```
+
+- Or - 
+
+```js
+Promise.resolve(123).then((res) => {
+  console.log(res) // Output: 123
+})
+```
+
+- If only `reject` is present in a `Promise`, then write like -
+
+```js
+const promise = Promise.reject(new Error('fail'))
+
+promise.catch((err) => {
+  console.log(err.message) // Output: fail
+})
+```
+
+- Or - 
+
+```js
+Promise.reject(new Error('fail')).catch((err) => {
+  console.log(err.message) // Output: fail
+})
+```
+
+- The concept is -
 - If `Promise` is completed, the `Promise` has been `Resolved`
 - Else the `Promise` has been `Rejected`
+- Creating a `Promise` -
+
+```js
+const hasMeeting = false
+
+const meeting = new Promise((resolve, reject) => {
+  if (!hasMeeting) {
+    const meetingDetails = {
+      name: 'An JavaScript Interview Session',
+      duration: '2 hours',
+      time: '10:30 PM',
+    }
+
+    resolve(meetingDetails)
+  } else {
+    reject(new Error('A meeting has already scheduled'))
+  }
+})
+
+meeting
+  .then((res) => {
+    console.log(JSON.stringify(res))
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+```
+
+- If `Promise` is completed, the `Promise` has been `Resolved`
+
+```text
+{"name":"An JavaScript Interview session","duration":"2 hours","time":"10:30 PM"}
+```
+
+- Else the `Promise` has been `Rejected`
+
+```text
+A meeting has already scheduled
+```
+
+- Multiple `then` use - 
+
+```js
+const hasMeeting = false
+
+const meeting = new Promise((resolve, reject) => {
+  if (!hasMeeting) {
+    const meetingDetails = {
+      name: 'An JavaScript Interview Session',
+      duration: '2 hours',
+      time: '10:30 PM',
+    }
+
+    resolve(meetingDetails)
+  } else {
+    reject(new Error('A meeting has already scheduled'))
+  }
+})
+
+const addToCalender = (meeting) => {
+  const calender = `I have a meeting titled ${meeting.name} at ${meeting.time}`
+  
+  // No need to 'reject' a 'Promise'. So, use direct 'resolve'
+  return Promise.resolve(calender)
+}
+
+meeting
+  .then(addToCalender)
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+```
+
+- If `Promise` is completed, the `Promise` has been `Resolved`
+
+```text
+I have a meeting titled An JavaScript Interview Session at 10:30 PM
+```
+
+- Else the `Promise` has been `Rejected`
+
+```text
+A meeting has already scheduled
+```
+
+- I can receive any error messages using `catch` block
+- 
