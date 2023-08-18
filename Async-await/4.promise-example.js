@@ -5,7 +5,7 @@ const mark = 90
 const enroll = () => {
   console.log('Enrollment is processing...')
 
-  // Either 'resolve' nor 'reject'. No console.log use
+  // Either 'resolve' nor 'reject'. No console.log use in 'Promise'
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (paymentStatus) resolve()

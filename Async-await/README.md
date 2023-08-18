@@ -1,4 +1,4 @@
-# Async Await in JavaScript
+# Asynchronous in JavaScript
 
 ## Callbacks
 
@@ -31,6 +31,7 @@ const display = (sum) => {
 const calculate = (value1, value2, callback) => {
   const sum = value1 + value2
 
+  // Use callback function
   if (callback) callback(sum)
 }
 
@@ -43,6 +44,7 @@ calculate(4, 5, display) // Output: The result is : 9
 const calculate = (value1, value2, callback) => {
   const sum = value1 + value2
 
+  // Calling anonymous callback function
   if (callback) callback(sum)
 }
 
@@ -65,6 +67,7 @@ function (sum) {
 const calculate = (value1, value2, callback) => {
   const sum = value1 + value2
 
+  // Calling arrow function
   if (callback) callback(sum)
 }
 
@@ -79,6 +82,263 @@ calculate(4, 5, (sum) => {
 ;(sum) => {
   console.log(`The result is : ${sum}`)
 }
+```
+
+- Callback example -
+
+```js
+const paymentStatus = true
+const mark = 80
+
+const enroll = (callback) => {
+  console.log('Enrollment is processing...')
+
+  setTimeout(() => {
+    if (paymentStatus) callback()
+    else console.log('Enrollment process is failed')
+  }, 2000)
+}
+
+const progress = (callback) => {
+  console.log('Course on progress...')
+
+  setTimeout(() => {
+    if (mark >= 80) callback()
+    else
+      console.log(
+        'You could not achieve enough marks for getting the certificate'
+      )
+  }, 3000)
+}
+
+const getCertificate = () => {
+  console.log('Preparing your certificate...')
+
+  setTimeout(() => {
+    console.log('Congratulation!!! You earn the certificate')
+  }, 2000)
+}
+
+enroll(() => {
+  progress(getCertificate)
+})
+```
+
+- Outcome -
+
+```text
+Enrollment is processing...
+
+(--- 2 seconds pause ---)
+
+Course on progress...
+
+(--- 3 seconds pause ---)
+
+Preparing your certificate...
+
+(--- 2 seconds pause ---)
+
+Congratulation!!! You earn the certificate
+```
+
+- Tips:
+- Inside `enroll` function I need to point `progress` function which takes a parameter, so use arrow function and inside that function call another function
+
+```js
+;() => {
+  progress(getCertificate)
+}
+```
+
+- But `progress` function doesn't take any parameter, so pass direct function name as callback function -
+
+```js
+progress(getCertificate)
+```
+
+### Promise
+
+- The previous example creates callback hell
+- To get rid of it, need to use `Promise` feature of JavaScript
+- `Promise` is a constructor function
+
+```js
+new Promise()
+```
+
+- Takes a function inside the constructor function
+
+```js
+// Using normal function
+new Promise(function () {})
+
+// Or using arrow function
+new Promise(() => {})
+```
+
+- That function takes two functions as a parameter named `resolve` & `reject` (convention)
+
+```js
+// Using normal function
+// Takes 'resolve' & 'reject' functions
+new Promise(function (resolve, reject) {})
+
+// Or using arrow function
+// Takes 'resolve' & 'reject' functions
+new Promise((resolve, reject) => {})
+```
+
+- The concept is -
+- If `Promise` is completed or success, the `Promise` has been `resolve` or `resolve` function calls
+- Else the `Promise` has been `reject` or `reject` function calls
+- `Promise` definition -
+
+```js
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (status) resolve('Task 1')
+    else reject(new Error('Error message'))
+  })
+})
+```
+
+- `Promise` calls -
+
+```js
+promise
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+```
+
+- Outcome if `resolve` -
+
+```text
+Task 1
+```
+
+- Outcome if `reject` -
+
+```text
+Error message
+```
+
+- Important notes:
+- If I use `Promise`, then it's an asynchronous function
+- If use `Promise`, either `resolve` or `reject`.
+- Don't use `console.log` instead of `resolve` or `reject`
+- See the above mentioned `Promise` definition
+- Use `console.log` inside the function of `then` or `catch`
+- See the above mentioned `Promise` call
+- Same mentioned callback example using `Promise`
+
+```js
+const paymentStatus = true
+const mark = 90
+
+// Use 'Promise' so it's an asynchronous function
+const enroll = () => {
+  console.log('Enrollment is processing...')
+
+  // Either 'resolve' nor 'reject'. No console.log use in 'Promise'
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (paymentStatus) resolve()
+      else reject(new Error('Enrollment process is failed'))
+    }, 2000)
+  })
+}
+
+const progress = () => {
+  console.log('Course on progress...')
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (mark >= 80) resolve()
+      else
+        reject(
+          new Error(
+            'You could not achieve enough marks for getting the certificate'
+          )
+        )
+    }, 3000)
+  })
+}
+
+const getCertificate = () => {
+  console.log('Preparing your certificate...')
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('Congratulation!!! You earn the certificate')
+    }, 2000)
+  })
+}
+
+enroll()
+  .then(progress)
+  .then(getCertificate)
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+```
+
+- Outcome -
+
+```text
+Enrollment is processing...
+
+(--- 2 seconds pause ---)
+
+Course on progress...
+
+(--- 3 seconds pause ---)
+
+Preparing your certificate...
+
+(--- 2 seconds pause ---)
+
+Congratulation!!! You earn the certificate
+```
+
+- Tips:
+- From root `Promise`, start use `then` and `catch`
+- For others only use `then`
+- Inside a `Promise`, if `resolve` doesn't take any parameter then call like -
+
+```js
+enroll().then(progress)
+```
+
+- Basically pass next `Promise` in `then`
+- Inside a `Promise`, if `resolve` use any parameter then call like -
+
+```js
+enroll().then((res) => {
+  console.log(res)
+})
+```
+
+- Basically receive the parameter sent from `resolve`
+- Only one `catch` will catch all the `reject`'s from all `Promise`
+
+```js
+enroll()
+  .then(progress)
+  .then(getCertificate)
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
 ```
 
 ## Synchronous Behavior
@@ -323,9 +583,7 @@ takeOrder(customer, () => {
 
 ## Promise
 
-- The previous example creates callback hell
-- To get rid of it, need to use `Promise` feature of JavaScript
-- The syntax of `Promise` - 
+- The syntax of `Promise` -
 
 ```js
 const meeting = new Promise((resolve, reject) => {
@@ -353,7 +611,7 @@ promise.then((res) => {
 })
 ```
 
-- Or - 
+- Or -
 
 ```js
 Promise.resolve(123).then((res) => {
@@ -371,7 +629,7 @@ promise.catch((err) => {
 })
 ```
 
-- Or - 
+- Or -
 
 ```js
 Promise.reject(new Error('fail')).catch((err) => {
@@ -379,9 +637,6 @@ Promise.reject(new Error('fail')).catch((err) => {
 })
 ```
 
-- The concept is -
-- If `Promise` is completed, the `Promise` has been `Resolved`
-- Else the `Promise` has been `Rejected`
 - Creating a `Promise` -
 
 ```js
@@ -422,7 +677,7 @@ meeting
 A meeting has already scheduled
 ```
 
-- Multiple `then` use - 
+- Multiple `then` use -
 
 ```js
 const hasMeeting = false
@@ -443,7 +698,7 @@ const meeting = new Promise((resolve, reject) => {
 
 const addToCalender = (meeting) => {
   const calender = `I have a meeting titled ${meeting.name} at ${meeting.time}`
-  
+
   // No need to 'reject' a 'Promise'. So, use direct 'resolve'
   return Promise.resolve(calender)
 }
@@ -471,4 +726,4 @@ A meeting has already scheduled
 ```
 
 - I can receive any error messages using `catch` block
-- 
+-

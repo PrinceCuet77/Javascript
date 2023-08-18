@@ -1,4 +1,4 @@
-const status = false
+const status = true
 
 // Promise definition
 const promise = new Promise((resolve, reject) => {
