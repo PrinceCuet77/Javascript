@@ -341,9 +341,53 @@ enroll()
   })
 ```
 
+- Look at the next `Promise` example - 
+
+```js
+const promise1 = Promise.resolve('Promise 1 resolved')
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('Promise 2 resolved')
+  }, 2000)
+})
+
+promise1.then((res) => console.log(res))
+promise2.then((res) => console.log(res))
+```
+
+- Output -
+
+```text
+Promise 1 resolved
+Promise 2 resolved
+```
+
+- Instead of one by one call, I can use `Promise.all`
+- Pass all the `Promise`'s in the form of an array
+- Receive all the resolved data in the form of an array too
+
+```js
+Promise.all([promise1, promise2]).then((res) => console.log(res))
+```
+
+- Outcome will be the same
+- If I want to process all the `Promise`s but want to show output who resolved first, then use `Promise.race`
+
+```js
+Promise.race([promise1, promise2]).then((res) => console.log(res))
+```
+
+- Outcome - 
+
+```text
+Promise 1 resolved
+```
+
 ### Async-Await
 
 - Use `async` so it's an asynchronous function
+- Asynchronous function returns by default `Promise`
 
 ```js
 // Normal asynchronous function
@@ -803,6 +847,7 @@ A meeting has already scheduled
 ```
 
 - I can receive any error messages using `catch` block
+- Run all the `Promise`'s at a time and receive result at last in the same time
 
 ### Async Await
 
@@ -846,4 +891,5 @@ meetingSchecule()
 ```
 
 - Outcome will be the same
-- 
+- So, to make sure best performance, I need to use asynchronous approach
+- To ignore blocking behavior, I need to use asynchronous approach as much as possible
