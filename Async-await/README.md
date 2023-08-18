@@ -341,6 +341,82 @@ enroll()
   })
 ```
 
+### Async-Await
+
+- Use `async` so it's an asynchronous function
+
+```js
+// Normal asynchronous function
+async function myFunction() {}
+
+// Asynchronous arrow function
+const myFunction = async () => {}
+```
+
+- I can only use `await` inside `async` function
+- Same mentioned callback example using `async`
+
+```js
+const paymentStatus = true
+const mark = 90
+
+// Use 'Promise' so it's an asynchronous function
+const enroll = () => {
+  console.log('Enrollment is processing...')
+
+  // Either 'resolve' nor 'reject'. No console.log use
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (paymentStatus) resolve()
+      else reject(new Error('Enrollment process is failed'))
+    }, 2000)
+  })
+}
+
+const progress = () => {
+  console.log('Course on progress...')
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (mark >= 80) resolve()
+      else
+        reject(
+          new Error(
+            'You could not achieve enough marks for getting the certificate'
+          )
+        )
+    }, 3000)
+  })
+}
+
+const getCertificate = () => {
+  console.log('Preparing your certificate...')
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('Congratulation!!! You earn the certificate')
+    }, 2000)
+  })
+}
+
+const course = async () => {
+  try {
+    await enroll()
+    await progress()
+    const message = await getCertificate()
+
+    console.log(message)
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+course()
+```
+
+- Outcome will be the same
+- Before use `await`, always use `try-catch` block for error handling
+
 ## Synchronous Behavior
 
 - JavaScript works synchronously
@@ -580,8 +656,9 @@ takeOrder(customer, () => {
 ```
 
 - Output will be the same
+- Problem is the above example is creating callback hell
 
-## Promise
+### Promise
 
 - The syntax of `Promise` -
 
@@ -726,4 +803,47 @@ A meeting has already scheduled
 ```
 
 - I can receive any error messages using `catch` block
--
+
+### Async Await
+
+- Same `Promise` example completed using `async` function
+
+```js
+const hasMeeting = false
+
+const meeting = new Promise((resolve, reject) => {
+  if (!hasMeeting) {
+    const meetingDetails = {
+      name: 'An JavaScript Interview Session',
+      duration: '2 hours',
+      time: '10:30 PM',
+    }
+
+    resolve(meetingDetails)
+  } else {
+    reject(new Error('A meeting has already scheduled'))
+  }
+})
+
+const addToCalender = (meeting) => {
+  const calender = `I have a meeting titled ${meeting.name} at ${meeting.time}`
+
+  // No need to 'reject' a 'Promise'. So, use direct 'resolve'
+  return Promise.resolve(calender)
+}
+
+const meetingSchecule = async () => {
+  try {
+    const meetingDetails = await meeting
+    const calender = await addToCalender(meetingDetails)
+    console.log(calender)
+  } catch (err) {
+    console.log(err.message)
+  }
+}
+
+meetingSchecule()
+```
+
+- Outcome will be the same
+- 
