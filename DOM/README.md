@@ -526,3 +526,37 @@ div.replaceChild(para, p1)
   <p>This is new.</p>
 </div>
 ```
+
+## JavaScript HTML DOM Collections
+
+- `getElementsByTagName()` returns `HTMLCollection` object
+- `HTMLCollection` object is an array-like list of HTML elements
+- - In HTML -
+
+```html
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+```
+
+- In JavaScript -
+
+```js
+const p = document.getElementsTagName('p')
+
+// Access 2nd element
+console.log(p[1]) // Output: <p id="p2">This is another paragraph.</p>
+
+// Defines the number of elements
+console.log(p.length) // Output: 2
+
+// Loop through the elements
+for (let i = 0; i < p.length; i++) {
+  console.log(p[i])
+}
+```
+
+## JavaScript HTML DOM Node Lists
+
+- 
