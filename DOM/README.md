@@ -291,6 +291,7 @@ element.addEventListener('click', () => {
 })
 ```
 
+- **Interview Question**
 - Event Bubbling: Execute the inner element first then the outer one
 - In HTML -
 
@@ -559,4 +560,43 @@ for (let i = 0; i < p.length; i++) {
 
 ## JavaScript HTML DOM Node Lists
 
-- 
+- `querySelectorAll()` returns `NodeList`
+- Accessing the element - 
+
+```html
+<p id="one">One</p>
+<p id="two">Two</p>
+<p id="three">Three</p>
+```
+
+- In JavaScript - 
+
+```js
+const p = document.querySelectorAll('p')
+console.log(p[0]) // Output: <p id="one">One</p>
+```
+
+- Finding the length - 
+
+```js
+p.length() // Output: 3
+```
+
+### Difference between `HTMLCollection` & `NodeList` (Interview Question)
+
+- `HTMLCollection` can be accessed by their name, id or index number
+
+```js
+const p = document.getElementById('p')
+
+console.log(p[0]) // Using index
+console.log(p['one']) // Using Id
+```
+
+- `NodeList` can only be accessed by their index number
+
+```js
+const p = document.querySelectorAll('p')
+
+console.log(p[0]) // Using index only
+```
