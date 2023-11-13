@@ -5,7 +5,8 @@
   - [What is Web Socket \& how it works?](#what-is-web-socket--how-it-works)
     - [Normal Case:](#normal-case)
     - [By Using Socket:](#by-using-socket)
-  - [A](#a)
+  - [Socket vs WebRTC](#socket-vs-webrtc)
+  - [Create New Project With Socket](#create-new-project-with-socket)
 
 
 # Socket.IO
@@ -38,6 +39,39 @@
 
 ![By Using Socket](photo/socket-connection.png)
 
-## A
+## Socket vs WebRTC
 
-- 
+| WebSocket | WebRTC |
+| ----------- | ----------- |
+| Uses UDP protocol | Uses TCP protocol |
+| Communication between server to browser & vice versa | Communication between browser to browser |
+| Designed for bi-directional communication between client & server | Designed for high performance, high quality video & audio communication |
+| Doesn't need STUN/TURN Server | Need STUN/TURN Server |
+
+![Socket vs WebRTC](photo/socket-vs-webRTC.png)
+
+- _UDP:_ User Datagram Protocol
+- _TCP_ Transmission Control Protocol
+
+## Create New Project With Socket
+
+- Create `package.json` file:
+
+```cmd
+npm init --y
+```
+
+- Install `Express JS`:
+
+```cmd
+npm i express --save
+```
+
+- Install `Socket.io`:
+
+```cmd
+npm i socket.io
+```
+
+- For server side, create `index.js` file
+- For client side, create `index.html` file
