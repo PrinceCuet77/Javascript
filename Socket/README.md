@@ -7,7 +7,8 @@
     - [By Using Socket:](#by-using-socket)
   - [Socket vs WebRTC](#socket-vs-webrtc)
   - [Create New Project With Socket](#create-new-project-with-socket)
-
+  - [Create A New Project](#create-a-new-project)
+  - [A](#a)
 
 # Socket.IO
 
@@ -41,12 +42,12 @@
 
 ## Socket vs WebRTC
 
-| WebSocket | WebRTC |
-| ----------- | ----------- |
-| Uses UDP protocol | Uses TCP protocol |
-| Communication between server to browser & vice versa | Communication between browser to browser |
+| WebSocket                                                         | WebRTC                                                                  |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Uses UDP protocol                                                 | Uses TCP protocol                                                       |
+| Communication between server to browser & vice versa              | Communication between browser to browser                                |
 | Designed for bi-directional communication between client & server | Designed for high performance, high quality video & audio communication |
-| Doesn't need STUN/TURN Server | Need STUN/TURN Server |
+| Doesn't need STUN/TURN Server                                     | Need STUN/TURN Server                                                   |
 
 ![Socket vs WebRTC](photo/socket-vs-webRTC.png)
 
@@ -75,3 +76,53 @@ npm i socket.io
 
 - For server side, create `index.js` file
 - For client side, create `index.html` file
+
+## Create A New Project
+
+- In `index.js` file:
+
+```js
+const express = require('express')
+const http = require('http')
+
+const app = express()
+const server = http.createServer(app) // Create a server
+
+// For URL -> http://localhost:3000/
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
+
+// Server listen port
+server.listen(3000, () => {
+  console.log('Server run at 3000 port')
+})
+```
+
+- In `index.html` file:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket Learning</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+  </body>
+</html>
+```
+
+## A
+
+- Configure socket in server side:
+
+```js
+const { Server } = require('socket.io')
+
+const app = express()
+const server = http.createServer(app)
+const io = new Server(server)
+```
