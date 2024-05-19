@@ -19,3 +19,20 @@ const people = [
     position: 'the boss',
   },
 ]
+
+const ages = people.map((person) => person.age)
+console.log(ages) // Output: [20, 25, 30]
+
+const newPeople = people.map((person) => {
+  return {
+    name: person.name.toUpperCase(),
+    oldAge: person.age * 2,
+  }
+})
+console.log(newPeople)
+// Output:
+// [
+//   { name: 'BOB', oldAge: 40 },
+//   { name: 'ANNA', oldAge: 50 },
+//   { name: 'SUSY', oldAge: 60 }
+// ]
