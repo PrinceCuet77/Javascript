@@ -2,8 +2,6 @@
 
 ## Arrow function
 
----
-
 - Normal function
 
 ```js
@@ -96,13 +94,9 @@ Javascript loves Vue
 
 ## Truthy / Falsy
 
----
-
 - False values are `false`, `0`, `""`, `null`, `undefined` & `NaN`
 
 ## Ternary Operator
-
----
 
 - Normal `if/else` statement
 
@@ -158,10 +152,9 @@ console.log(type)
 
 ## `find()` Method
 
----
-
 - Could't change the main array
 - Return the first element for which the condition is `true`
+- If not found, return `undefind`
 
 ```js
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -263,8 +256,6 @@ student.exampleFunction()
 
 ## `findIndex()` Method
 
----
-
 - Could't change the main array
 - Takes 3 parameters, i.e. `value`, `index` and `arr`
 - Returns the array index where the condition is `true`
@@ -290,8 +281,6 @@ console.log(result2) // Output: -1
 
 ## `filter()` Method
 
----
-
 - Could't change the main array
 - Takes 3 parameters, i.e. `value`, `index` and `arr`
 - Returns a new array for which case the condition is `true`
@@ -307,8 +296,6 @@ console.log(result) // Output: [40, 50, 60]
 ```
 
 ## `slice()` Method
-
----
 
 - Couldn't change main array
 - 1st parameter: +ve = start from front, -ve = start from end
@@ -374,8 +361,6 @@ console.log(number1) // Output: [10, 20, 30, 40, 100, 200]
 
 ## `concat()` Method
 
----
-
 - Couldn't change the main array
 - Returns new array which contains all the elements
 - I can concatenation multiple array
@@ -393,8 +378,6 @@ console.log(result2) // Output: [1, 2, 3, 10, 20, 30, 100, 200, 300]
 ```
 
 ## `push()` Method
-
----
 
 - Modify the array
 - Returns the new length of the modified array
@@ -416,8 +399,6 @@ console.log(result) // Output: 10
 ```
 
 ## `map()` Method
-
----
 
 - Couldn't change the main array
 - Must return all the elements inside the arrow function
@@ -454,9 +435,7 @@ console.log(sum) // Output: 15
 
 ## `for in` loop
 
----
-
-- Iterates an object, array and string
+- Iterates an `object`, `array` and `string`
 - Receive the propery for object & index for array and string
 
 ```js
@@ -498,7 +477,7 @@ Property: founder, and Value: Brendan Eich
 0 1 2 3 4 5
 ```
 
-- Iterates only an array and string
+- Iterates only an `array` and `string`
 - Return the value of an array and the element of the string
 
 ```js
@@ -527,8 +506,6 @@ P r i n c e
 ```
 
 ## Important Object Tricks
-
----
 
 - `Object.keys()` returns the keys or properties in the form of an array
 - `Object.values()` returns the values in the form of an array
@@ -589,8 +566,6 @@ console.log(myObj)
 
 ## Default Parameter
 
----
-
 - Set a default value at the last parameter of the function
 - If I don't provide any value then use default parameter
 - If I provide the value then apply that provided value
@@ -605,8 +580,6 @@ greeting('Prince', 'Good Afternoon!') // Output: Hello Prince, Good Afternoon!
 ```
 
 ## Spread Operator
-
----
 
 - Couldn't modify the main array
 - Make a copy and add to the new array
@@ -683,8 +656,6 @@ console.log(newNumber) // Output: [100, 2, 3]
 ```
 
 ## Rest Operator
-
----
 
 - Must be last argument in the funciton parameter
 - Received all the elements in the function
@@ -1497,4 +1468,4 @@ console.log(planguage || 'JavaScript') // Output: JavaScript
 
 ### Dynamic Import
 
-- 
+-
