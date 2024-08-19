@@ -22,9 +22,9 @@
 ## _Question-01:_ Remove falsy values from any array
 
 ```js
-const miscellaneous = ['A', '', 'a', NaN, 'I']
+const miscellaneous = ['A', '', 'a', NaN, 'I'];
 
-console.log(miscellaneous.filter(Boolean)) // Output: [ 'A', 'a', 'I' ]
+console.log(miscellaneous.filter(Boolean)); // Output: [ 'A', 'a', 'I' ]
 ```
 
 - _NOTE:_ 6 falsy values are `false`, `0`, `undefined`, `''` `null`, `NaN`
@@ -39,30 +39,30 @@ console.log(miscellaneous.filter(Boolean)) // Output: [ 'A', 'a', 'I' ]
 - _Way-01:_
 
 ```js
-console.log(Boolean('Mashrafi')) // Output: true
-console.log(Boolean(undefined)) // Output: false
-console.log(Boolean(1)) // Output: true
-console.log(Boolean(0)) // Output: false
+console.log(Boolean('Mashrafi')); // Output: true
+console.log(Boolean(undefined)); // Output: false
+console.log(Boolean(1)); // Output: true
+console.log(Boolean(0)); // Output: false
 ```
 
 - _Way-02:_
 
 ```js
-console.log(!!'Mashrafi') // Output: true
-console.log(!!undefined) // Output: false
-console.log(!!1) // Output: true
-console.log(!!0) // Output: false
+console.log(!!'Mashrafi'); // Output: true
+console.log(!!undefined); // Output: false
+console.log(!!1); // Output: true
+console.log(!!0); // Output: false
 ```
 
 ## _Question-03:_ Resizing any array
 
 ```js
-let letters = ['A', 'N', 'L', 'I']
-console.log(letters) // Output: [ 'A', 'N', 'L', 'I' ]
+let letters = ['A', 'N', 'L', 'I'];
+console.log(letters); // Output: [ 'A', 'N', 'L', 'I' ]
 
-letters.length = 3 // Resizing any array
+letters.length = 3; // Resizing any array
 
-console.log(letters) // Output: [ 'A', 'N', 'L' ]
+console.log(letters); // Output: [ 'A', 'N', 'L' ]
 ```
 
 ## _Question-04:_ How to flattern a multi-dimensional array
@@ -71,8 +71,8 @@ console.log(letters) // Output: [ 'A', 'N', 'L' ]
 - Enable to convert just one level 2D array like `[1, [2, 3], 4]`
 
 ```js
-let letters = ['A', ['AA', 'BB'], 'C', ['AAA', 'CCC']]
-letters.flat()
+let letters = ['A', ['AA', 'BB'], 'C', ['AAA', 'CCC']];
+letters.flat();
 ```
 
 - _Output:_
@@ -84,8 +84,8 @@ letters.flat()
 - Can't able to flat multi-level like `[1, [2], [3, [4]]]`
 
 ```js
-let anotherLetters = ['A', ['AA', 'BB', ['AAA', 'DDD']], 'C', ['AAA', 'CCC']]
-anotherLetters.flat()
+let anotherLetters = ['A', ['AA', 'BB', ['AAA', 'DDD']], 'C', ['AAA', 'CCC']];
+anotherLetters.flat();
 ```
 
 - _Output:_
@@ -97,7 +97,7 @@ anotherLetters.flat()
 - Multi-level array flatting
 
 ```js
-anotherLetters.flat(Infinity)
+anotherLetters.flat(Infinity);
 ```
 
 - Output:
@@ -115,9 +115,9 @@ anotherLetters.flat(Infinity)
 - Using `if` statement
 
 ```js
-const captain = 'Mashrafi'
+const captain = 'Mashrafi';
 if (captain === 'Mashrafi') {
-  console.log('I love Mashrafi')
+  console.log('I love Mashrafi');
 }
 // Output: I love Mashrafi
 ```
@@ -125,16 +125,16 @@ if (captain === 'Mashrafi') {
 - Instead of 'if' statement, using `&&`
 
 ```js
-captain === 'Mashrafi' && console.log('I love Mashrafi')
+captain === 'Mashrafi' && console.log('I love Mashrafi');
 // Output: I love Mashrafi
 ```
 
 - If want to handle not matched partion
 
 ```js
-const captain = 'Mashrafi2'
+const captain = 'Mashrafi2';
 if (captain !== 'Mashrafi') {
-  console.log('I hate Bangladesh')
+  console.log('I hate Bangladesh');
 }
 // Output: I hate Bangladesh
 ```
@@ -142,18 +142,19 @@ if (captain !== 'Mashrafi') {
 - Instead of not matched statement, using `||`
 
 ```js
-captain === 'Mashrafi' || console.log('I hate Bangladesh')
+captain === 'Mashrafi' || console.log('I hate Bangladesh');
 // Output: I hate Bangladesh
 ```
 
 ## _Question-06:_ Replace all occurances of a string
 
 ```js
-const quote = 'React is a Javascript framework & this framework is the most popular front-end framework right now'
+const quote =
+  'React is a Javascript framework & this framework is the most popular front-end framework right now';
 
 // Replace all occurrences of 'framework' with 'library'
 // g - global, i - case sen
-quote.replace(/framework/g, 'library')
+quote.replace(/framework/g, 'library');
 
 // Output:
 // React is a Javascript library & this library is the most popular front-end library right now
@@ -162,7 +163,7 @@ quote.replace(/framework/g, 'library')
 - _TIPS:_ Log values with variables names smartly
 
 ```js
-const name = 'Prince'
+const name = 'Prince';
 console.log({ name });
 ```
 
@@ -171,13 +172,13 @@ console.log({ name });
 ```js
 const startTime = performance.now();
 
-for ( let i = 0; i <= 50; i++ ) {
+for (let i = 0; i <= 50; i++) {
   console.log(i);
 }
 
 const endTime = performance.now();
 
-console.log(`Loop took ${(endTime - startTime)} milliseconds to finish`);
+console.log(`Loop took ${endTime - startTime} milliseconds to finish`);
 
 // Output:
 // Loop took 15.600313000380993 milliseconds to finish
@@ -215,8 +216,8 @@ console.log(a, b);
 const language = {
   name: 'Javascript',
   founded: 1995,
-  founder: 'Brendan Eich'
-}
+  founder: 'Brendan Eich',
+};
 
 const { name, founder } = language; // Destructuring
 console.log(name, founder);
@@ -228,14 +229,14 @@ console.log(languageName, fCreatorNameounder);
 ## _Question-10:_ Get value as data type
 
 ```html
-<input id='id1' type='text' value='123' />
+<input id="id1" type="text" value="123" />
 ```
 
 - Normally, `document.querySelector('#id1')` must be a string value
 
 ```js
 const element = document.querySelector('#id1').valueAsNumber;
-console.log(typeof(element));
+console.log(typeof element);
 
 // Output: number
 ```
@@ -255,7 +256,7 @@ const removeDuplicates = [...new Set(array)];
 ```js
 const hasSameElements = (a, b) => {
   return a.length === a.length && a.every((value, index) => value === b[index]);
-}
+};
 
 hasSameElements([1, 2], [1, 3]); // false
 hasSameElements([1, 2], [1, 2]); // true
@@ -274,7 +275,7 @@ numbers.sort((a, b) => a - b);
 - _NOTE:_
 - If `a - b` result is `-ve`, `a` is sorted before `b`
 - If `a - b` result is `+ve`, `b` is sorted before `a`
-- If `a - b` result is `0`,  no changes
+- If `a - b` result is `0`, no changes
 - But wants to shuffling the array
 
 ```js
@@ -324,3 +325,159 @@ for (let i = 0, j = 3; i <= 3; i++, j--) {
 // a[2][1] = 6
 // a[3][0] = 7
 ```
+
+## _Question-15:_ Output of `[] + []`
+
+- Without string & number, JavaScript do typecasting & convert to a string
+- String conversion of `[]` is `''`
+- String conversion of `{}` is `[object object]`
+
+```js
+console.log([] + []); // Output: ''
+console.log({} + []); // Output: [object object]
+```
+
+- But, what about `true + 5`
+
+```js
+console.log(true + 5); // Output: 6
+console.log(false + 5); // Output: 5
+```
+
+## _Question-16:_ Output of the function? - Template Literals
+
+```js
+function fn() {
+  // Receives `hello` argument but not used
+  return 'Bangladesh';
+}
+
+const string = fn`hello`; // Function calling with `hello` argument
+
+console.log(string); // Output: Bangladesh
+```
+
+## _Question-17:_ Output of the function? - `arguments`
+
+- By default, `this` takes all the parameters of the function
+- Inside the `fn` function is referring to the length of the `arguments` object, which is `2`.
+
+```js
+function fn() {
+  console.log(this); // Output: Arguments(2)
+  // Output: Arguments[0] = fn()
+  // Output: Arguments[1] = 5
+
+  console.log(`The length is ${this.length}`);
+}
+
+let value = {
+  length: 10,
+  method: function (fn) {
+    arguments[0]();
+  },
+};
+
+value.method(fn, 5); // Output: The length is 2
+```
+
+## _Question-23:_ Count duplicate elements in an array
+
+- Input:
+
+```txt
+
+```
+
+- Output:
+
+```txt
+
+```
+
+- Code:
+
+```js
+
+```
+
+## _Question-24:_ Reverse words in a string
+
+```js
+const str = 'I love Bangladesh';
+```
+
+## _Question-25:_
+
+- A
+
+## Debounce Handling
+
+- Why do we use `debounce` handling?
+- If I have a button for cart & by pressing that button, call an API & spend money based on the cart items
+- If user click multiple times then backend will receive more than one request
+- To prevent that bounce effect, we need debounce handling
+- Actually, stop taking user's API request for a certain amount of times
+- Debounce means prevent or stop bounce effect
+- HTML source code:
+
+```html
+<div>
+  <button id="button">Click Here</button>
+</div>
+```
+
+- Debounce handling:
+
+```js
+cosnt button = document.getElementById('button');
+
+// Debounce handler
+function debounce(fn, delay) {
+  let timerId;
+  return function () {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    timerId = setTimeout(() => {
+      fn();
+    }, delay);
+  }
+}
+
+button.addEventListener('click', debounce(function () {
+  console.log('Clicked');
+}, 2000));
+```
+
+## JavaScript `NaN`
+
+```js
+const weird = NaN;
+console.log(weird === weird); // Output: false
+```
+
+- Same as:
+
+```js
+const result1 = 'Sumit' / 5;
+const result2 = 'Bad programmer' / 3;
+
+console.log(result1); // Output: NaN
+console.log(result2); // Output: NaN
+
+console.log(result1 === result2); // Output: false
+```
+
+- Tricky interview question:
+
+```js
+const array = [NaN];
+const result = array.includes(NaN);
+
+console.log(result); // Output: true
+```
+
+- As, `array.includes()` uses different equality algorithm like `Same-value-zero equality`
+- `Object.is()` is similar to same-value equality, but `+0` and `-0` are considered equal
