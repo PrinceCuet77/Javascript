@@ -16,6 +16,14 @@
   - [_Question-12:_ Compare two arrays by value](#question-12-compare-two-arrays-by-value)
   - [_Question-13:_ Shuffling array](#question-13-shuffling-array)
   - [_Question-14:_ Comma Operator](#question-14-comma-operator)
+  - [_Question-15:_ Output of `[] + []`](#question-15-output-of---)
+  - [_Question-16:_ Output of the function? - Template Literals](#question-16-output-of-the-function---template-literals)
+  - [_Question-17:_ Output of the function? - `arguments`](#question-17-output-of-the-function---arguments)
+  - [_Question-23:_ Count duplicate elements in an array](#question-23-count-duplicate-elements-in-an-array)
+  - [_Question-24:_ Reverse words in a string](#question-24-reverse-words-in-a-string)
+  - [_Question-25:_ Sorting words by length in a sentence](#question-25-sorting-words-by-length-in-a-sentence)
+  - [Debounce Handling](#debounce-handling)
+  - [JavaScript `NaN`](#javascript-nan)
 
 # JavaScript: Tips & Tricks
 
@@ -386,30 +394,97 @@ value.method(fn, 5); // Output: The length is 2
 - Input:
 
 ```txt
-
+['A', 'B', 'C', 'A', 'C', 'F', 'F', 'D', 'A']
 ```
 
 - Output:
 
 ```txt
-
+{ 'A': 3, 'B': 1, 'C': 2, 'D': 1 'F': 2 }
 ```
 
 - Code:
 
 ```js
+const letters = ['A', 'B', 'C', 'A', 'C', 'F', 'F', 'D', 'A'];
 
+function countDuplicates(data) {
+  const output = {};
+
+  // forEach() works as well
+  data.map((item) => {
+    output[item] = (output[item] || 0) + 1;
+  });
+
+  return output;
+}
+
+console.log(countDuplicates(letters));
 ```
 
 ## _Question-24:_ Reverse words in a string
 
-```js
-const str = 'I love Bangladesh';
+- Input:
+
+```txt
+I love Bangladesh
 ```
 
-## _Question-25:_
+- Output:
 
-- A
+```txt
+I evol hsedalgnaB
+```
+
+- Output:
+
+```js
+const str = 'I love Bangladesh';
+
+function reverseWords(data) {
+  const words = data.split(' ');
+
+  const output = data.map((item) => {
+    return item.split('').reverse().join('');
+  });
+
+  return output.join(' ');
+}
+
+console.log(reverseWords(str));
+```
+
+## _Question-25:_ Sorting words by length in a sentence
+
+- Input:
+
+```txt
+Java is a programming language
+```
+
+- Output:
+
+```txt
+a is Java language programming
+```
+
+- Output:
+
+```js
+const str = 'Java is a programming language';
+
+function sortWords(data) {
+  const words = data.split(' ');
+
+  data.sort((a, b) => {
+    return a.length - b.length;
+  });
+
+  return data.join(' ');
+}
+
+console.log(sortWords(str));
+```
 
 ## Debounce Handling
 
