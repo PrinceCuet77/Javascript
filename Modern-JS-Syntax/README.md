@@ -1,3 +1,39 @@
+- [Modern Javascript Syntax](#modern-javascript-syntax)
+  - [Arrow function](#arrow-function)
+  - [Truthy / Falsy](#truthy--falsy)
+  - [Ternary Operator](#ternary-operator)
+  - [`find()` Method](#find-method)
+  - [`findIndex()` Method](#findindex-method)
+  - [`filter()` Method](#filter-method)
+  - [`slice()` Method](#slice-method)
+  - [`splice()` Method](#splice-method)
+  - [`concat()` Method](#concat-method)
+  - [`push()` Method](#push-method)
+  - [`map()` Method](#map-method)
+  - [`reduce()` Method](#reduce-method)
+  - [`for in` loop](#for-in-loop)
+  - [`for of` loop](#for-of-loop)
+  - [Important Object Tricks](#important-object-tricks)
+  - [Default Parameter](#default-parameter)
+  - [Spread Operator](#spread-operator)
+  - [Rest Operator](#rest-operator)
+  - [Object Destructuring](#object-destructuring)
+  - [Array Destructuring](#array-destructuring)
+  - [Import / Export](#import--export)
+    - [Named Export](#named-export)
+    - [Named Import](#named-import)
+    - [Default Export](#default-export)
+    - [Default Import](#default-import)
+  - [Template Literals](#template-literals)
+  - [Tagged Template Literals](#tagged-template-literals)
+  - [Sets](#sets)
+  - [WeakSet](#weakset)
+  - [`copyWithin()` Method](#copywithin-method)
+  - [ES11 Features](#es11-features)
+    - [Optional Chaining](#optional-chaining)
+    - [Nullish Coalescing Operator](#nullish-coalescing-operator)
+    - [Dynamic Import](#dynamic-import)
+
 # Modern Javascript Syntax
 
 ## Arrow function
@@ -6,38 +42,38 @@
 
 ```js
 function number() {
-  return 10
+  return 10;
 }
 
-console.log(number()) // Output: 10
+console.log(number()); // Output: 10
 ```
 
 - Convert it into arrow function
 
 ```js
 const number = () => {
-  return 10
-}
+  return 10;
+};
 
-console.log(number()) // Output: 10
+console.log(number()); // Output: 10
 ```
 
 - Inside arrow function, contains single statement
 
 ```js
-const number = () => 10
+const number = () => 10;
 
-console.log(number()) // Output: 10
+console.log(number()); // Output: 10
 ```
 
 - If function takes parameters
 
 ```js
-const number = (n) => n
-const sum = (a, b) => a + b
+const number = (n) => n;
+const sum = (a, b) => a + b;
 
-console.log(number(100)) // Output: 100
-console.log(sum(10, 20)) // Output: 30
+console.log(number(100)); // Output: 100
+console.log(sum(10, 20)); // Output: 30
 ```
 
 - Outer and inner `this` indication remain same in arrow function
@@ -49,12 +85,12 @@ const javascript = {
   libraries: ['React', 'Angular', 'Vue'],
   printLibraries: function () {
     this.libraries.forEach(function (library) {
-      console.log(`${this.name} loves ${library}`)
-    })
+      console.log(`${this.name} loves ${library}`);
+    });
   },
-}
+};
 
-javascript.printLibraries()
+javascript.printLibraries();
 ```
 
 - Output:
@@ -73,12 +109,12 @@ const javascript = {
   libraries: ['React', 'Angular', 'Vue'],
   printLibraries: function () {
     this.libraries.forEach((library) => {
-      console.log(`${this.name} loves ${library}`)
-    })
+      console.log(`${this.name} loves ${library}`);
+    });
   },
-}
+};
 
-javascript.printLibraries()
+javascript.printLibraries();
 ```
 
 - Output:
@@ -101,53 +137,53 @@ Javascript loves Vue
 - Normal `if/else` statement
 
 ```js
-const a = 5
+const a = 5;
 
-let access
+let access;
 if (a > 5) {
-  access = true
+  access = true;
 } else {
-  access = false
+  access = false;
 }
 
-console.log(access) // Output: false
+console.log(access); // Output: false
 ```
 
 - Using ternary operator
 
 ```js
-const a = 5
+const a = 5;
 
-let access = a > 5 ? true : false
-console.log(access) // Output: false
+let access = a > 5 ? true : false;
+console.log(access); // Output: false
 ```
 
 - Multi-level `if/else` statement
 
 ```js
-const age = 14
+const age = 14;
 
-let type
+let type;
 if (age > 18) {
-  type = 'Adult'
+  type = 'Adult';
 } else {
   if (age > 10) {
-    type = 'Young'
+    type = 'Young';
   } else {
-    type = 'Child'
+    type = 'Child';
   }
 }
 
-console.log(type) // Output: Young
+console.log(type); // Output: Young
 ```
 
 - Using ternary operator, the code will be shorten
 
 ```js
-const age = 14
-const type = age > 18 ? 'Adult' : age > 10 ? 'Young' : 'Child'
+const age = 14;
+const type = age > 18 ? 'Adult' : age > 10 ? 'Young' : 'Child';
 
-console.log(type)
+console.log(type);
 ```
 
 ## `find()` Method
@@ -157,27 +193,27 @@ console.log(type)
 - If not found, return `undefind`
 
 ```js
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const result = numbers.find((value) => {
-  return value > 4
-})
+  return value > 4;
+});
 
-console.log(result) // Output: 5
+console.log(result); // Output: 5
 ```
 
 - Inside `find()` function, not only access values of that array
 - But also access the index and that array too
 
 ```js
-const numbers = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+const numbers = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 const result = numbers.find((value, index, arr) => {
-  console.log(value, index, arr)
-  return value > 40
-})
+  console.log(value, index, arr);
+  return value > 40;
+});
 
-console.log(result)
+console.log(result);
 ```
 
 - Output:
@@ -191,32 +227,35 @@ console.log(result)
 50
 ```
 
-- `find()` function takes 2nd parameter as `this`
+- `find()` function takes
+  - 1st parameter as function
+  - 2nd parameter as `this`
+- Need to pass `this` for accessing other properties & methods of class
 - For example:
 
 ```js
 class Student {
   constructor(name, age) {
-    this.name = name
-    this.age = age
+    this.name = name;
+    this.age = age;
   }
 
   test() {
-    console.log('Hello')
+    console.log('Hello');
   }
 
   exampleFunction() {
-    const arr = [1, 2, 3]
+    const arr = [1, 2, 3];
 
     // Takes 2nd parameter
     arr.find(function () {
-      this.test()
-    }, this)
+      this.test();
+    }, this);
   }
 }
 
-const student = new Student('Prince', 10)
-student.exampleFunction()
+const student = new Student('Prince', 10);
+student.exampleFunction();
 ```
 
 - Output:
@@ -232,24 +271,24 @@ Hello
 ```js
 class Student {
   constructor(name, age) {
-    this.name = name
-    this.age = age
+    this.name = name;
+    this.age = age;
   }
 
   test() {
-    console.log('Hello')
+    console.log('Hello');
   }
 
   exampleFunction() {
-    const arr = [1, 2, 3]
+    const arr = [1, 2, 3];
     arr.find(() => {
-      this.test()
-    })
+      this.test();
+    });
   }
 }
 
-const student = new Student('Prince', 10)
-student.exampleFunction()
+const student = new Student('Prince', 10);
+student.exampleFunction();
 ```
 
 - Output: same as before
@@ -258,26 +297,28 @@ student.exampleFunction()
 
 - Could't change the main array
 - Takes 3 parameters, i.e. `value`, `index` and `arr`
-- Returns the array index where the condition is `true`
+- Returns the array `index` where the condition is `true`
 - If the condition is `false`, return `-1`
 
 ```js
-const number = [10, 20, 30, 40, 50, 60]
+const number = [10, 20, 30, 40, 50, 60];
 
 const result = number.findIndex((value, index, arr) => {
-  return value > 35
-})
+  return value > 35;
+});
 
-console.log(result) // Output: 3
+console.log(result); // Output: 3
 
 const result2 = number.findIndex((value) => {
-  return value > 100
-})
+  return value > 100;
+});
 
-console.log(result2) // Output: -1
+console.log(result2); // Output: -1
 ```
 
-- `findIndex()` function takes 2nd parameter as `this` too
+- `findIndex()` function takes 1st & 2nd parameter like `find()` method
+  - 1st parameter as function
+  - 2nd parameter as `this`
 
 ## `filter()` Method
 
@@ -286,13 +327,13 @@ console.log(result2) // Output: -1
 - Returns a new array for which case the condition is `true`
 
 ```js
-const number = [10, 20, 30, 40, 50, 60]
+const number = [10, 20, 30, 40, 50, 60];
 
 const result = number.filter((value) => {
-  return value > 35
-})
+  return value > 35;
+});
 
-console.log(result) // Output: [40, 50, 60]
+console.log(result); // Output: [40, 50, 60]
 ```
 
 ## `slice()` Method
@@ -301,18 +342,18 @@ console.log(result) // Output: [40, 50, 60]
 - 1st parameter: +ve = start from front, -ve = start from end
 
 ```js
-const number = [10, 20, 30, 40, 50, 60]
+const number = [10, 20, 30, 40, 50, 60];
 
-const result = number.slice(1, 3)
-console.log(result) // Output: [20, 30]
+const result = number.slice(1, 3);
+console.log(result); // Output: [20, 30]
 
 // [10, 20, 30, 40, 50, 60]
 //      ^   ^
 //      1   3
 //     1st 2nd
 
-const result2 = number.slice(-2, 5)
-console.log(result2) // Output: [50]
+const result2 = number.slice(-2, 5);
+console.log(result2); // Output: [50]
 
 // [10, 20, 30, 40, 50, 60]
 //                  ^
@@ -329,11 +370,11 @@ console.log(result2) // Output: [50]
 - Returns an array contains removed elements
 
 ```js
-const number = [10, 20, 30, 40, 50, 60]
+const number = [10, 20, 30, 40, 50, 60];
 
-const result = number.splice(1, 2, 100, 200, 300)
-console.log(result) // Output: [20, 30]
-console.log(number) // Output: [10, 100, 200, 300, 40,  50,  60]
+const result = number.splice(1, 2, 100, 200, 300);
+console.log(result); // Output: [20, 30]
+console.log(number); // Output: [10, 100, 200, 300, 40,  50,  60]
 
 // [10, 20, 30, 40, 50, 60]
 //      ^
@@ -344,10 +385,10 @@ console.log(number) // Output: [10, 100, 200, 300, 40,  50,  60]
 //     100, 200, 300
 //     Rest parameters
 
-const number1 = [10, 20, 30, 40, 50, 60]
-const result1 = number1.splice(-2, 5, 100, 200)
-console.log(result1) // Output: [50, 60]
-console.log(number1) // Output: [10, 20, 30, 40, 100, 200]
+const number1 = [10, 20, 30, 40, 50, 60];
+const result1 = number1.splice(-2, 5, 100, 200);
+console.log(result1); // Output: [50, 60]
+console.log(number1); // Output: [10, 20, 30, 40, 100, 200]
 
 // [10, 20, 30, 40, 50, 60]
 //                  ^
@@ -366,15 +407,15 @@ console.log(number1) // Output: [10, 20, 30, 40, 100, 200]
 - I can concatenation multiple array
 
 ```js
-const number1 = [1, 2, 3]
-const number2 = [10, 20, 30]
-const number3 = [100, 200, 300]
+const number1 = [1, 2, 3];
+const number2 = [10, 20, 30];
+const number3 = [100, 200, 300];
 
-const result = number1.concat(number2)
-console.log(result) // Output: [1, 2, 3, 10, 20, 30]
+const result = number1.concat(number2);
+console.log(result); // Output: [1, 2, 3, 10, 20, 30]
 
-const result2 = number1.concat(number2, number3)
-console.log(result2) // Output: [1, 2, 3, 10, 20, 30, 100, 200, 300]
+const result2 = number1.concat(number2, number3);
+console.log(result2); // Output: [1, 2, 3, 10, 20, 30, 100, 200, 300]
 ```
 
 ## `push()` Method
@@ -383,19 +424,19 @@ console.log(result2) // Output: [1, 2, 3, 10, 20, 30, 100, 200, 300]
 - Returns the new length of the modified array
 
 ```js
-const numbers = [1, 2, 3, 4, 5]
+const numbers = [1, 2, 3, 4, 5];
 
-let result = numbers.push(10)
-console.log(numbers) // Output: [1, 2, 3, 4, 5, 10]
-console.log(result) // Output: 6
+let result = numbers.push(10);
+console.log(numbers); // Output: [1, 2, 3, 4, 5, 10]
+console.log(result); // Output: 6
 
-result = numbers.push(10, 11, 12)
-console.log(numbers) // Output: [1, 2, 3, 4, 5, 10, 10, 11, 12]
-console.log(result) // Output: 9
+result = numbers.push(10, 11, 12);
+console.log(numbers); // Output: [1, 2, 3, 4, 5, 10, 10, 11, 12]
+console.log(result); // Output: 9
 
-result = numbers.push([100, 200])
-console.log(numbers) // Output: [1, 2, 3, 4, 5, 10, 10, 11, 12, [100, 200]]
-console.log(result) // Output: 10
+result = numbers.push([100, 200]);
+console.log(numbers); // Output: [1, 2, 3, 4, 5, 10, 10, 11, 12, [100, 200]]
+console.log(result); // Output: 10
 ```
 
 ## `map()` Method
@@ -405,32 +446,32 @@ console.log(result) // Output: 10
 - Used to traverse the array
 
 ```js
-const numbers = [10, 20, 30, 40]
+const numbers = [10, 20, 30, 40];
 
 const result = numbers.map((num) => {
-  return 2 * num
-})
+  return 2 * num;
+});
 
-console.log(result) // Output: [20, 40, 60, 80]
-console.log(numbers) // Output: [10, 20, 30, 40]
+console.log(result); // Output: [20, 40, 60, 80]
+console.log(numbers); // Output: [10, 20, 30, 40]
 ```
 
 ## `reduce()` Method
 
 - Couldn't change the main array
-- 1st parameter: previously returned value
+- 1st parameter: function which takes previously returned value & current value
 - 2nd parameter: current value
 - 3rd parameter: index of the current value
 - 4th parameter: takes the whole array
 
 ```js
-const numbers = [1, 2, 3, 4, 5]
+const numbers = [1, 2, 3, 4, 5];
 
 const sum = numbers.reduce((prev, current) => {
-  return prev + current
-})
+  return prev + current;
+}, 5);
 
-console.log(sum) // Output: 15
+console.log(sum); // Output: 15
 ```
 
 ## `for in` loop
@@ -444,21 +485,21 @@ const myObj = {
   name: 'Javascript',
   estd: '1995',
   founder: 'Brendan Eich',
-}
+};
 for (property in myObj) {
-  console.log(`Property: ${property}, and Value: ${myObj[property]}`)
+  console.log(`Property: ${property}, and Value: ${myObj[property]}`);
 }
 
 // Array
-const myArray = [10, 20, 30, 40, 50]
+const myArray = [10, 20, 30, 40, 50];
 for (value in myArray) {
-  console.log(value)
+  console.log(value);
 }
 
 // String
-const str = 'Prince'
+const str = 'Prince';
 for (ch in str) {
-  console.log(ch)
+  console.log(ch);
 }
 ```
 
@@ -477,21 +518,23 @@ Property: founder, and Value: Brendan Eich
 0 1 2 3 4 5
 ```
 
+## `for of` loop
+
 - Iterates only an `array` and `string`
 - Return the value of an array and the element of the string
 
 ```js
 // Array
-const myArray = [10, 20, 30, 40, 50]
+const myArray = [10, 20, 30, 40, 50];
 
 for (value of myArray) {
-  console.log(value)
+  console.log(value);
 }
 
 // String
-const str = 'Prince'
+const str = 'Prince';
 for (ch of str) {
-  console.log(ch)
+  console.log(ch);
 }
 ```
 
@@ -516,16 +559,16 @@ const myObj = {
   name: 'Javascript',
   estd: '1995',
   founder: 'Brendan Eich',
-}
+};
 
-const keys = Object.keys(myObj)
-console.log(keys) // Output: [ 'name', 'estd', 'founder' ]
+const keys = Object.keys(myObj);
+console.log(keys); // Output: [ 'name', 'estd', 'founder' ]
 
-const values = Object.values(myObj)
-console.log(values) // Output: [ 'Javascript', '1995', 'Brendan Eich' ]
+const values = Object.values(myObj);
+console.log(values); // Output: [ 'Javascript', '1995', 'Brendan Eich' ]
 
-const entries = Object.entries(myObj)
-console.log(entries)
+const entries = Object.entries(myObj);
+console.log(entries);
 
 // Output
 // [
@@ -538,8 +581,8 @@ console.log(entries)
 - If property and assigned variable both are same named as same, then I can shorten the property name like -
 
 ```js
-const x = 10
-const y = 15
+const x = 10;
+const y = 15;
 
 const myObj = {
   name: 'Javascript',
@@ -547,9 +590,9 @@ const myObj = {
   founder: 'Brendan Eich',
   x,
   y,
-}
+};
 
-console.log(myObj)
+console.log(myObj);
 ```
 
 - Output:
@@ -572,11 +615,11 @@ console.log(myObj)
 
 ```js
 function greeting(name, message = 'Good Morning!') {
-  console.log(`Hello ${name}, ${message}`)
+  console.log(`Hello ${name}, ${message}`);
 }
 
-greeting('Prince') // Output: Hello Prince, Good Morning!
-greeting('Prince', 'Good Afternoon!') // Output: Hello Prince, Good Afternoon!
+greeting('Prince'); // Output: Hello Prince, Good Morning!
+greeting('Prince', 'Good Afternoon!'); // Output: Hello Prince, Good Afternoon!
 ```
 
 ## Spread Operator
@@ -585,34 +628,34 @@ greeting('Prince', 'Good Afternoon!') // Output: Hello Prince, Good Afternoon!
 - Make a copy and add to the new array
 
 ```js
-const number = [1, 2, 3]
+const number = [1, 2, 3];
 
-const newNumber = [...number, 10, 20]
-console.log(number) // Output: [1, 2, 3]
-console.log(newNumber) // Output: [1, 2, 3, 10, 20]
+const newNumber = [...number, 10, 20];
+console.log(number); // Output: [1, 2, 3]
+console.log(newNumber); // Output: [1, 2, 3, 10, 20]
 ```
 
 - If I modify the main array, It won't modify the new one and vice versa
 
 ```js
-const number = [1, 2, 3]
-const newNumber = [...number, 10, 20]
+const number = [1, 2, 3];
+const newNumber = [...number, 10, 20];
 
-number.push(100) // Add a new element
+number.push(100); // Add a new element
 
-console.log(number) // Output: [1, 2, 3, 100]
-console.log(newNumber) // Output: [1, 2, 3, 10, 20]
+console.log(number); // Output: [1, 2, 3, 100]
+console.log(newNumber); // Output: [1, 2, 3, 10, 20]
 ```
 
 - Multiple spread operators in a single array
 
 ```js
-const number = [1, 2, 3]
-const number2 = [11, 22, 33]
+const number = [1, 2, 3];
+const number2 = [11, 22, 33];
 
-const newNumber = [...number, 100, 200, ...number2]
+const newNumber = [...number, 100, 200, ...number2];
 
-console.log(newNumber) // Output: [1, 2, 3, 100, 200, 11, 22, 33]
+console.log(newNumber); // Output: [1, 2, 3, 100, 200, 11, 22, 33]
 ```
 
 - Spread operator in an object
@@ -621,11 +664,11 @@ console.log(newNumber) // Output: [1, 2, 3, 100, 200, 11, 22, 33]
 const person = {
   name: 'Prince',
   age: 22,
-}
+};
 
-const newPerson = { ...person, position: 'Software Engineer', salary: '15k' }
+const newPerson = { ...person, position: 'Software Engineer', salary: '15k' };
 
-console.log(newPerson)
+console.log(newPerson);
 ```
 
 - Output:
@@ -639,20 +682,20 @@ console.log(newPerson)
 }
 ```
 
-- If I assign, not to take as copy but as a reference
+- If I assign one variable to another, not to take as copy but as a reference
 
 ```js
-const numbers = [1, 2, 3]
+const numbers = [1, 2, 3];
 
-const newNumber = numbers
+const newNumber = numbers;
 
-console.log(numbers) // Output: [1, 2, 3]
-console.log(newNumber) // Output: [1, 2, 3]
+console.log(numbers); // Output: [1, 2, 3]
+console.log(newNumber); // Output: [1, 2, 3]
 
-numbers[0] = 100
+numbers[0] = 100;
 
-console.log(numbers) // Output: [100, 2, 3]
-console.log(newNumber) // Output: [100, 2, 3]
+console.log(numbers); // Output: [100, 2, 3]
+console.log(newNumber); // Output: [100, 2, 3]
 ```
 
 ## Rest Operator
@@ -662,32 +705,32 @@ console.log(newNumber) // Output: [100, 2, 3]
 
 ```js
 function myFunc() {
-  console.log(arguments) // Output: [Arguments] { '0': 1, '1': 2, '2': 3, '3': 4, '4': 5 }
-  console.log(arguments[0]) // Output: 1
+  console.log(arguments); // Output: [Arguments] { '0': 1, '1': 2, '2': 3, '3': 4, '4': 5 }
+  console.log(arguments[0]); // Output: 1
 }
 
-myFunc(1, 2, 3, 4, 5)
+myFunc(1, 2, 3, 4, 5);
 ```
 
 - Grabs all the parameters in the funciton
 
 ```js
 function myFunc(...params) {
-  console.log(params) // Output: [1, 2, 3, 4, 5]
+  console.log(params); // Output: [1, 2, 3, 4, 5]
 }
 
-myFunc(1, 2, 3, 4, 5)
+myFunc(1, 2, 3, 4, 5);
 ```
 
 - Grabs a few parameters in the function
 
 ```js
 function myFunc(a, ...params) {
-  console.log(a) // Output: 1
-  console.log(params) // Output: [2, 3, 4, 5]
+  console.log(a); // Output: 1
+  console.log(params); // Output: [2, 3, 4, 5]
 }
 
-myFunc(1, 2, 3, 4, 5)
+myFunc(1, 2, 3, 4, 5);
 ```
 
 ## Object Destructuring
@@ -699,14 +742,14 @@ const user = {
   id: '123',
   name: 'Prince',
   age: 23,
-}
+};
 
-const name = user.name
-console.log(name) // Output: Prince
+const name = user.name;
+console.log(name); // Output: Prince
 
 // Alternative way
-const name1 = user['name']
-console.log(name1) // Output: Prince
+const name1 = user['name'];
+console.log(name1); // Output: Prince
 ```
 
 - While using nested object, then will face problems
@@ -719,10 +762,10 @@ const user = {
   id: '123',
   name: 'Prince',
   age: 23,
-}
+};
 
-const { name } = user
-console.log(name) // Output: Prince
+const { name } = user;
+console.log(name); // Output: Prince
 ```
 
 - Using alias
@@ -732,10 +775,10 @@ const user = {
   id: '123',
   name: 'Prince',
   age: 23,
-}
+};
 
-const { name: title } = user
-console.log(title) // Output: Prince
+const { name: title } = user;
+console.log(title); // Output: Prince
 ```
 
 - Use object destructuring in nested object
@@ -748,13 +791,13 @@ const user = {
   education: {
     degree: 'Masters',
   },
-}
+};
 
 const {
   education: { degree },
-} = user
+} = user;
 
-console.log(degree) // Output: Masters
+console.log(degree); // Output: Masters
 ```
 
 - Using alias in nested object
@@ -767,13 +810,13 @@ const user = {
   education: {
     degree: 'Masters',
   },
-}
+};
 
 const {
   education: { degree: deg },
-} = user
+} = user;
 
-console.log(deg) // Output: Masters
+console.log(deg); // Output: Masters
 ```
 
 - If `eduction` object is not present, then the last program shows error
@@ -784,11 +827,11 @@ const user = {
   id: '123',
   name: 'Prince',
   age: 23,
-}
+};
 
-const { education: { degree } = {} } = user
+const { education: { degree } = {} } = user;
 
-console.log(degree) // Output: undefined
+console.log(degree); // Output: undefined
 ```
 
 ## Array Destructuring
@@ -796,35 +839,35 @@ console.log(degree) // Output: undefined
 - Fetching the elements of an array
 
 ```js
-const numbers = [1, 2, 4, 5, 6]
+const numbers = [1, 2, 4, 5, 6];
 
-const [a, b] = numbers
+const [a, b] = numbers;
 
-console.log(a) // Output: 1
-console.log(b) // Output: 2
+console.log(a); // Output: 1
+console.log(b); // Output: 2
 ```
 
 - Skip some elements of an array
 - For example, fetching 2nd & 5th elements
 
 ```js
-const numbers = [1, 2, 4, 5, 6]
+const numbers = [1, 2, 4, 5, 6];
 
-const [, a, , , b] = numbers
+const [, a, , , b] = numbers;
 
-console.log(a) // Output: 2
-console.log(b) // Output: 6
+console.log(a); // Output: 2
+console.log(b); // Output: 6
 ```
 
 - In nested array
 
 ```js
-const numbers = [1, 2, [100, 200, 300, 400], 4, 5, 6]
+const numbers = [1, 2, [100, 200, 300, 400], 4, 5, 6];
 
-const [, , [, a, b]] = numbers
+const [, , [, a, b]] = numbers;
 
-console.log(a) // Output: 200
-console.log(b) // Output: 300
+console.log(a); // Output: 200
+console.log(b); // Output: 300
 ```
 
 ## Import / Export
@@ -845,11 +888,11 @@ console.log(b) // Output: 300
 - In `first.js` file -
 
 ```js
-export const pi = 3.14
-export const a = 2.9
+export const pi = 3.14;
+export const a = 2.9;
 
 export function greeting() {
-  console.log('Good morning...')
+  console.log('Good morning...');
 }
 ```
 
@@ -860,19 +903,19 @@ export function greeting() {
 - In `second.js` file -
 
 ```js
-import { a, pi, greeting } from './first.js'
+import { a, pi, greeting } from './first.js';
 
-console.log(a, pi) // Output: 2.9 3.14
-greeting() // Output: Good morning...
+console.log(a, pi); // Output: 2.9 3.14
+greeting(); // Output: Good morning...
 ```
 
 - Using `*` alias to catch multiple named imported value
 
 ```js
-import * as value from './first.js'
+import * as value from './first.js';
 
 // Stored all imported variables and funcitons in 'value' object
-console.log(value)
+console.log(value);
 
 // Output:
 // [Module: null prototype] {
@@ -882,22 +925,22 @@ console.log(value)
 // }
 
 // Calling imported (named) variables
-console.log(value.a, value.pi) // Output: 2.9 3.14
+console.log(value.a, value.pi); // Output: 2.9 3.14
 
 // Calling imported (named) function
-value.greeting() // Output: Good morning...
+value.greeting(); // Output: Good morning...
 ```
 
 - Using single single aliases to catch multiple named imported value
 
 ```js
-import { a as newA, pi as newPi, greeting as newGreeting } from './first.js'
+import { a as newA, pi as newPi, greeting as newGreeting } from './first.js';
 
 // Calling imported (named) variables
-console.log(newA, newPi) // Output: 2.9 3.14
+console.log(newA, newPi); // Output: 2.9 3.14
 
 // Calling imported (named) function
-newGreeting() // Output: Good morning...
+newGreeting(); // Output: Good morning...
 ```
 
 ### Default Export
@@ -908,24 +951,24 @@ newGreeting() // Output: Good morning...
 - In `first.js` file -
 
 ```js
-const a = 2.9
-export default a
+const a = 2.9;
+export default a;
 ```
 
 - Function export (default)
 
 ```js
 function greeting() {
-  console.log('Good morning...')
+  console.log('Good morning...');
 }
-export default greeting
+export default greeting;
 ```
 
 - Another way to use default export for function
 
 ```js
 export default function greeting() {
-  console.log('Good morning...')
+  console.log('Good morning...');
 }
 ```
 
@@ -933,10 +976,10 @@ export default function greeting() {
 
 ```js
 const greeting = () => {
-  console.log('Good morning...')
-}
+  console.log('Good morning...');
+};
 
-export default greeting
+export default greeting;
 ```
 
 ### Default Import
@@ -945,36 +988,36 @@ export default greeting
 - In `second.js` file -
 
 ```js
-import aa from './first.js'
+import aa from './first.js';
 
-console.log(aa) // Output: 2.9
+console.log(aa); // Output: 2.9
 ```
 
 - Importing the function which is passed to other file using default export
 - In `second.js` file -
 
 ```js
-import anotherGreeting from './first.js'
+import anotherGreeting from './first.js';
 
-anotherGreeting() // Output: Good morning...
+anotherGreeting(); // Output: Good morning...
 ```
 
 - Default import/export & named import/export together
 - In `first.js` file -
 
 ```js
-export const pi = 3.14
+export const pi = 3.14;
 
-const a = 2.9
-export default a
+const a = 2.9;
+export default a;
 ```
 
 - In `second.js` file -
 
 ```js
-import a, { pi } from './first.js'
+import a, { pi } from './first.js';
 
-console.log(a, pi)
+console.log(a, pi);
 ```
 
 ## Template Literals
@@ -982,25 +1025,25 @@ console.log(a, pi)
 - normal or problematic way
 
 ```js
-const a = 5
-const b = 6
+const a = 5;
+const b = 6;
 
-console.log('I am ' + a + ' and I am ' + b) // Output: I am 5 and I am 6
+console.log('I am ' + a + ' and I am ' + b); // Output: I am 5 and I am 6
 ```
 
 - Using template literals
 
 ```js
-const a = 5
-const b = 6
+const a = 5;
+const b = 6;
 
-console.log(`I am ${a} and I am ${b}`) // Output: I am 5 and I am 6
+console.log(`I am ${a} and I am ${b}`); // Output: I am 5 and I am 6
 ```
 
 - Conduct arithmetic operation
 
 ```js
-console.log(`I am ${a + b}`) // Output: I am 11
+console.log(`I am ${a + b}`); // Output: I am 11
 ```
 
 - Approve multi-line indentation
@@ -1008,7 +1051,7 @@ console.log(`I am ${a + b}`) // Output: I am 11
 ```js
 console.log(`I am test 
 
-        This is test`)
+        This is test`);
 // Output:
 // I am test
 
@@ -1021,20 +1064,20 @@ console.log(`I am test
 
 ```js
 function modifier(strings, ...values) {
-  console.log(strings) // Output: [ 'We have ', ' and ', ' in our cricket team.' ]
-  console.log(values) // Output: [ 'Sakib', 'Tamim' ]
+  console.log(strings); // Output: [ 'We have ', ' and ', ' in our cricket team.' ]
+  console.log(values); // Output: [ 'Sakib', 'Tamim' ]
 
   const newStrings = strings.reduce((prev, current) => {
-    return prev + current + (values.length ? `Mr. ${values.shift()}` : '')
-  }, '')
+    return prev + current + (values.length ? `Mr. ${values.shift()}` : '');
+  }, '');
 
-  return newStrings
+  return newStrings;
 }
 
-const player1 = 'Sakib'
-const player2 = 'Tamim'
+const player1 = 'Sakib';
+const player2 = 'Tamim';
 
-console.log(modifier`We have ${player1} and ${player2} in our cricket team.`) // Output: We have Mr. Sakib and Mr. Tamim in our cricket team.
+console.log(modifier`We have ${player1} and ${player2} in our cricket team.`); // Output: We have Mr. Sakib and Mr. Tamim in our cricket team.
 ```
 
 ## Sets
@@ -1045,60 +1088,60 @@ console.log(modifier`We have ${player1} and ${player2} in our cricket team.`) //
 - `Set` area created with `new` keyword
 
 ```js
-const myArray = [] //  Literal syntax
-const myArray2 = new Array() // Constructor syntax
+const myArray = []; //  Literal syntax
+const myArray2 = new Array(); // Constructor syntax
 
-let mySet = new Set()
-console.log(mySet) // Output: Set(0) {}
+let mySet = new Set();
+console.log(mySet); // Output: Set(0) {}
 ```
 
 - Any data can be added into `Set`
 
 ```js
 // Insert an element
-mySet.add(10)
-mySet.add('Bangladesh')
+mySet.add(10);
+mySet.add('Bangladesh');
 
-console.log(mySet) // Output: Set(2) { 10, 'Bangladesh' }
+console.log(mySet); // Output: Set(2) { 10, 'Bangladesh' }
 ```
 
 - Delete data from `set` element
 
 ```js
-mySet.delete('Bangladesh')
+mySet.delete('Bangladesh');
 
-console.log(mySet) // Output: Set(2) { 10 }
+console.log(mySet); // Output: Set(2) { 10 }
 ```
 
 - Check an element is present or not in `Set`
 
 ```js
-console.log(mySet.has('Bangladesh')) // Output: false
+console.log(mySet.has('Bangladesh')); // Output: false
 ```
 
 - We can do method chaining with `Set` methods
 - Because the methods are returning the modified `Set`
 
 ```js
-mySet.add(5).add(6).add('Bangladesh').delete(5)
+mySet.add(5).add(6).add('Bangladesh').delete(5);
 
-console.log(mySet) // Output: Set(2) { 6, 'Bangladesh' }
+console.log(mySet); // Output: Set(2) { 6, 'Bangladesh' }
 ```
 
 - Clears all the elements
 
 ```js
-mySet.add(5).add(6).add('Bangladesh').clear()
+mySet.add(5).add(6).add('Bangladesh').clear();
 
-console.log(mySet) // Output: Set(0) {}
+console.log(mySet); // Output: Set(0) {}
 ```
 
 - Returns the length of the `Set`
 
 ```js
-mySet.add(5).add(6).add('Bangladesh')
+mySet.add(5).add(6).add('Bangladesh');
 
-console.log(mySet.size) // 3
+console.log(mySet.size); // 3
 ```
 
 - We can pass any iterable in `Set`
@@ -1106,29 +1149,29 @@ console.log(mySet.size) // 3
 - Create `Set` from `Array`:
 
 ```js
-let myArray = [1, 2, 4, 4, 1, 3]
-let mySet = new Set(myArray)
+let myArray = [1, 2, 4, 4, 1, 3];
+let mySet = new Set(myArray);
 
 // Store only unique values
-console.log(mySet) // Output: Set(4) { 1, 2, 4, 3 }
+console.log(mySet); // Output: Set(4) { 1, 2, 4, 3 }
 ```
 
 - First iterable - `String`
 - Create `Set` from `String`:
 
 ```js
-let mySet = new Set('ABCCB')
+let mySet = new Set('ABCCB');
 
-console.log(mySet) // Output: Set(3) { 'A', 'B', 'C' }
+console.log(mySet); // Output: Set(3) { 'A', 'B', 'C' }
 ```
 
 - `Set` is iterable
 
 ```js
-let mySet = new Set('ABCCB')
+let mySet = new Set('ABCCB');
 
 for (let value of mySet) {
-  console.log(value)
+  console.log(value);
 }
 
 // Output:
@@ -1143,13 +1186,13 @@ for (let value of mySet) {
 - Create `Array` from `Set`:
 
 ```js
-let mySet = new Set('ABCCB')
+let mySet = new Set('ABCCB');
 
 // Method 1 (Recommended - easy to use)
-console.log([...mySet]) // Output: [ 'A', 'B', 'C' ]
+console.log([...mySet]); // Output: [ 'A', 'B', 'C' ]
 
 // Method 2
-console.log(Array.from(mySet)) // Output: [ 'A', 'B', 'C' ]
+console.log(Array.from(mySet)); // Output: [ 'A', 'B', 'C' ]
 ```
 
 - Conduct any operation in `Set`:
@@ -1160,25 +1203,25 @@ console.log(Array.from(mySet)) // Output: [ 'A', 'B', 'C' ]
 - `Set` is used to get unique elements from an array
 
 ```js
-let myArray = [1, 2, 3, 4, 5, 5, 5, 5, 6, 5]
+let myArray = [1, 2, 3, 4, 5, 5, 5, 5, 6, 5];
 
-console.log([...new Set(myArray)]) // Output: [ 1, 2, 3, 4, 5, 6 ]
+console.log([...new Set(myArray)]); // Output: [ 1, 2, 3, 4, 5, 6 ]
 ```
 
 - Union, Intersection, Difference
 
 ```js
-const a = new Set([1, 2, 3])
-const b = new Set([1, 3, 5])
+const a = new Set([1, 2, 3]);
+const b = new Set([1, 3, 5]);
 
-const union = new Set([...a], [...b])
-console.log(union) // Output: Set(3) { 1, 2, 3 }
+const union = new Set([...a], [...b]);
+console.log(union); // Output: Set(3) { 1, 2, 3 }
 
-const intersection = new Set([...a].filter((x) => b.has(x)))
-console.log(intersection) // Output: Set(3) { 1, 3 }
+const intersection = new Set([...a].filter((x) => b.has(x)));
+console.log(intersection); // Output: Set(3) { 1, 3 }
 
-const difference = new Set([...a].filter((x) => !b.has(x)))
-console.log(difference) // Output: Set(1) { 2 }
+const difference = new Set([...a].filter((x) => !b.has(x)));
+console.log(difference); // Output: Set(1) { 2 }
 ```
 
 ## WeakSet
@@ -1188,13 +1231,13 @@ console.log(difference) // Output: Set(1) { 2 }
 
 ```js
 // Array of object
-const ws = new WeakSet([{ a: 1 }, { b: 2 }])
+const ws = new WeakSet([{ a: 1 }, { b: 2 }]);
 ```
 
 - Add an element
 
 ```js
-ws.add({ a: 1 })
+ws.add({ a: 1 });
 ```
 
 - `WeakSet` are not iterables
@@ -1206,35 +1249,35 @@ class someClass {
   constructor() {}
 
   method() {
-    console.log('This method can be accessed')
+    console.log('This method can be accessed');
   }
 }
 
-someClass.prototype.method() // Output: This method can be accessed
+someClass.prototype.method(); // Output: This method can be accessed
 ```
 
 - But it should not be accessed
 - Using `WeakSet`, force to create an object to access its method
 
 ```js
-const ws = new WeakSet()
+const ws = new WeakSet();
 
 class someClass {
   constructor() {
-    ws.add(this)
+    ws.add(this);
   }
 
   method() {
     if (!ws.has(this)) {
-      throw new Error('Can not be accessed')
+      throw new Error('Can not be accessed');
     }
 
-    console.log('This method can be accessed')
+    console.log('This method can be accessed');
   }
 }
 
-const sc = new someClass()
-sc.method() // Output: This method can be accessed
+const sc = new someClass();
+sc.method(); // Output: This method can be accessed
 ```
 
 ## `copyWithin()` Method
@@ -1283,46 +1326,46 @@ sc.method() // Output: This method can be accessed
 - Examples: 01 -> `end` is absent
 
 ```js
-const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST'];
 
-a.copyWithin(3, 2)
-console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'Python', 'Ruby', 'C++' ]
+a.copyWithin(3, 2);
+console.log(a); // Output: [ 'JavaScript', 'PHP', 'Python', 'Python', 'Ruby', 'C++' ]
 ```
 
 - Examples: 02 -> `target` is out of the `array.length`
 
 ```js
-const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST'];
 
-a.copyWithin(6, 1, 2)
-console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST' ]
+a.copyWithin(6, 1, 2);
+console.log(a); // Output: [ 'JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST' ]
 ```
 
 - Examples: 03 -> `start` and `end` are absent
 
 ```js
-const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST'];
 
-a.copyWithin(3)
-console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'JavaScript', 'PHP', 'Python' ]
+a.copyWithin(3);
+console.log(a); // Output: [ 'JavaScript', 'PHP', 'Python', 'JavaScript', 'PHP', 'Python' ]
 ```
 
 - Examples: 04 -> `start > end`, so no copy
 
 ```js
-const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST'];
 
-a.copyWithin(3, -1, -2)
-console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST' ]
+a.copyWithin(3, -1, -2);
+console.log(a); // Output: [ 'JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST' ]
 ```
 
 - Examples: 05 -> Now `start < end`
 
 ```js
-const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST']
+const a = ['JavaScript', 'PHP', 'Python', 'Ruby', 'C++', 'RUST'];
 
-a.copyWithin(3, -2, -1)
-console.log(a) // Output: [ 'JavaScript', 'PHP', 'Python', 'C++', 'C++', 'RUST' ]
+a.copyWithin(3, -2, -1);
+console.log(a); // Output: [ 'JavaScript', 'PHP', 'Python', 'C++', 'C++', 'RUST' ]
 ```
 
 ## ES11 Features
@@ -1340,14 +1383,14 @@ const language = {
       company: 'Facebook',
     },
   },
-}
+};
 
 // Accessing company
-const company = language.library.react.company
-console.log(company) // Output: Facebook
+const company = language.library.react.company;
+console.log(company); // Output: Facebook
 
-const company1 = language.library.react.company1
-console.log(company1) // Output: undefined
+const company1 = language.library.react.company1;
+console.log(company1); // Output: undefined
 ```
 
 - If received object's property from an API, then can't ensure `company` property is undefined or not
@@ -1361,9 +1404,9 @@ const company2 =
   language.library.react &&
   language.library.react.company
     ? language.library.react.company
-    : undefined
+    : undefined;
 
-console.log(company2) // Output: Facebook
+console.log(company2); // Output: Facebook
 
 const company3 =
   language &&
@@ -1371,8 +1414,8 @@ const company3 =
   language.library.react &&
   language.library.react.company
     ? language.library.react.company
-    : undefined
-console.log(company3) // Output: undefined
+    : undefined;
+console.log(company3); // Output: undefined
 ```
 
 - More cleaner syntax
@@ -1382,35 +1425,35 @@ const company4 =
   language &&
   language.library &&
   language.library.react &&
-  language.library.react.company
+  language.library.react.company;
 
-console.log(company4) // Output: Facebook
+console.log(company4); // Output: Facebook
 
 const company5 =
   language &&
   language.library &&
   language.library.react &&
-  language.library.react.company
+  language.library.react.company;
 
-console.log(company4) // Output: undefined
+console.log(company4); // Output: undefined
 ```
 
 - But, more efficient way (optional chaining)
 
 ```js
-const company6 = language?.library?.react?.company
-console.log(company6) // Output: Facebook
+const company6 = language?.library?.react?.company;
+console.log(company6); // Output: Facebook
 
-const company7 = language?.library?.react?.company1
-console.log(company7) // Output: undefined
+const company7 = language?.library?.react?.company1;
+console.log(company7); // Output: undefined
 ```
 
 - I can use that concept in an array
 
 ```js
-const colors = ['red', null, 'green', 'blue']
-console.log(colors?.[1]) // Output: null
-console.log(colors?.[0]) // Output: red
+const colors = ['red', null, 'green', 'blue'];
+console.log(colors?.[1]); // Output: null
+console.log(colors?.[0]); // Output: red
 ```
 
 ### Nullish Coalescing Operator
@@ -1421,49 +1464,49 @@ console.log(colors?.[0]) // Output: red
 - Example: `undefined`
 
 ```js
-let planguage
-console.log(planguage ?? 'JavaScript') // Output: JavaScript
-console.log(planguage || 'JavaScript') // Output: JavaScript
+let planguage;
+console.log(planguage ?? 'JavaScript'); // Output: JavaScript
+console.log(planguage || 'JavaScript'); // Output: JavaScript
 ```
 
 - Example: `null`
 
 ```js
-let planguage = null
-console.log(planguage ?? 'JavaScript') // Output: JavaScript
-console.log(planguage || 'JavaScript') // Output: JavaScript
+let planguage = null;
+console.log(planguage ?? 'JavaScript'); // Output: JavaScript
+console.log(planguage || 'JavaScript'); // Output: JavaScript
 ```
 
 - Example: `0`
 
 ```js
-let planguage = 0
-console.log(planguage ?? 'JavaScript') // Output: 0
-console.log(planguage || 'JavaScript') // Output: JavaScript
+let planguage = 0;
+console.log(planguage ?? 'JavaScript'); // Output: 0
+console.log(planguage || 'JavaScript'); // Output: JavaScript
 ```
 
 - Example: `''`
 
 ```js
-let planguage = ''
-console.log(planguage ?? 'JavaScript') // Output: ''
-console.log(planguage || 'JavaScript') // Output: JavaScript
+let planguage = '';
+console.log(planguage ?? 'JavaScript'); // Output: ''
+console.log(planguage || 'JavaScript'); // Output: JavaScript
 ```
 
 - Example: `false`
 
 ```js
-let planguage = false
-console.log(planguage ?? 'JavaScript') // Output: false
-console.log(planguage || 'JavaScript') // Output: JavaScript
+let planguage = false;
+console.log(planguage ?? 'JavaScript'); // Output: false
+console.log(planguage || 'JavaScript'); // Output: JavaScript
 ```
 
 - Example: `NaN`
 
 ```js
-let planguage = NaN
-console.log(planguage ?? 'JavaScript') // Output: NaN
-console.log(planguage || 'JavaScript') // Output: JavaScript
+let planguage = NaN;
+console.log(planguage ?? 'JavaScript'); // Output: NaN
+console.log(planguage || 'JavaScript'); // Output: JavaScript
 ```
 
 ### Dynamic Import
