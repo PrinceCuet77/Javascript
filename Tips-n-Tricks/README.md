@@ -24,6 +24,7 @@
   - [_Question-25:_ Sorting words by length in a sentence](#question-25-sorting-words-by-length-in-a-sentence)
   - [Debounce Handling](#debounce-handling)
   - [JavaScript `NaN`](#javascript-nan)
+  - [Memoization](#memoization)
 
 # JavaScript: Tips & Tricks
 
@@ -556,3 +557,95 @@ console.log(result); // Output: true
 
 - As, `array.includes()` uses different equality algorithm like `Same-value-zero equality`
 - `Object.is()` is similar to same-value equality, but `+0` and `-0` are considered equal
+
+## Memoization
+
+- Calculate huge calculation multiple times are resource waste
+- Prevent huge costly calculation multiple times, use memoization
+- Remember the previous calculation in a cache or variable & use it every times after the first time
+- Need higher order function
+  - Takes another function as a parameter
+  - Return a new function
+  - Takes another function as a parameter & returns a new function
+- If values are static or single value or variable:
+
+```js
+const add = (x) => x + 10;
+
+// Higher order function
+const memo = (fn) => {
+  const cache = {};
+
+  return (x) => {
+    if (cache[x]) {
+      console.log('Returning from caching');
+      return cache[x];
+    }
+
+    console.log('Caching for the first time');
+    cache[x] = fn(x);
+    return cache[x];
+  };
+};
+
+const calculate = memo(add);
+console.log(calculate(5));
+console.log(calculate(5));
+console.log(calculate(5));
+console.log(calculate(5));
+```
+
+- Output:
+
+```txt
+Caching for the first time
+15
+Returning from caching
+15
+Returning from caching
+15
+Returning from caching
+15
+```
+
+- If values are dynamic:
+
+```js
+// REST operator & 'x' is now an array
+const add = (...x) => x.reduce((sum, currentVal) => sum + currentVal, 0) + 10;
+
+const memo = (fn) => {
+  const cache = {};
+
+  return (...x) => {
+    const key = JSON.stringify(x);
+    if (cache[key]) {
+      console.log('Returning from caching ', cache);
+      return cache[key];
+    }
+
+    console.log('Caching for the first time, cache: ', cache);
+    cache[key] = fn(...x);
+    return cache[key];
+  };
+};
+
+const calculate = memo(add);
+console.log(calculate(10, 20, 30, 40));
+console.log(calculate(10, 20, 30, 40));
+console.log(calculate(10, 20, 30));
+console.log(calculate(10, 20, 30));
+```
+
+- Output:
+
+```txt
+Caching for the first time, cache:  {}
+110
+Returning from caching  { '[10,20,30,40]': 110 }
+110
+Caching for the first time, cache:  { '[10,20,30,40]': 110 }
+70
+Returning from caching  { '[10,20,30,40]': 110, '[10,20,30]': 70 }
+70
+```
