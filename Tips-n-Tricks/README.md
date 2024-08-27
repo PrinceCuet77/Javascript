@@ -19,12 +19,22 @@
   - [_Question-15:_ Output of `[] + []`](#question-15-output-of---)
   - [_Question-16:_ Output of the function? - Template Literals](#question-16-output-of-the-function---template-literals)
   - [_Question-17:_ Output of the function? - `arguments`](#question-17-output-of-the-function---arguments)
+  - [_Question-18:_](#question-18)
+  - [_Question-19:_](#question-19)
+  - [_Question-20:_](#question-20)
+  - [_Question-21:_](#question-21)
+  - [_Question-22:_](#question-22)
   - [_Question-23:_ Count duplicate elements in an array](#question-23-count-duplicate-elements-in-an-array)
   - [_Question-24:_ Reverse words in a string](#question-24-reverse-words-in-a-string)
   - [_Question-25:_ Sorting words by length in a sentence](#question-25-sorting-words-by-length-in-a-sentence)
+  - [_Question-26:_ Sorting words by length in a sentence](#question-26-sorting-words-by-length-in-a-sentence)
   - [Debounce Handling](#debounce-handling)
-  - [JavaScript `NaN`](#javascript-nan)
   - [Memoization](#memoization)
+  - [Intersection Observer API](#intersection-observer-api)
+  - [Javascript `Object.groupBy()`](#javascript-objectgroupby)
+  - [Event Delegation](#event-delegation)
+  - [Event Propagation](#event-propagation)
+  - [JavaScript `NaN`](#javascript-nan)
 
 # JavaScript: Tips & Tricks
 
@@ -390,6 +400,26 @@ let value = {
 value.method(fn, 5); // Output: The length is 2
 ```
 
+## _Question-18:_
+
+- A
+
+## _Question-19:_
+
+- A
+
+## _Question-20:_
+
+- A
+
+## _Question-21:_
+
+- A
+
+## _Question-22:_
+
+- A
+
 ## _Question-23:_ Count duplicate elements in an array
 
 - Input:
@@ -487,6 +517,48 @@ function sortWords(data) {
 console.log(sortWords(str));
 ```
 
+## _Question-26:_ Sorting words by length in a sentence
+
+- `var i` - functional scope
+- `let i` - block scope
+- Web API takes `setTimeout` & done its task
+- Can't use `await` with `setTimeout`, move to another function & set under `Promise`
+
+```js
+const DURATION = 1000;
+
+const delay = (i) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(i);
+    }, i * DURATION);
+  });
+};
+
+const timer = async (n) => {
+  console.log('Starting...');
+  for (let i = 1; i <= n; i++) {
+    const result = await delay(i);
+    console.log(result);
+  }
+  console.log('Ending...');
+};
+
+timer(5);
+```
+
+- Output:
+
+```txt
+Starting...
+1
+2
+3
+4
+5
+Ending...
+```
+
 ## Debounce Handling
 
 - Why do we use `debounce` handling?
@@ -526,37 +598,6 @@ button.addEventListener('click', debounce(function () {
   console.log('Clicked');
 }, 2000));
 ```
-
-## JavaScript `NaN`
-
-```js
-const weird = NaN;
-console.log(weird === weird); // Output: false
-```
-
-- Same as:
-
-```js
-const result1 = 'Sumit' / 5;
-const result2 = 'Bad programmer' / 3;
-
-console.log(result1); // Output: NaN
-console.log(result2); // Output: NaN
-
-console.log(result1 === result2); // Output: false
-```
-
-- Tricky interview question:
-
-```js
-const array = [NaN];
-const result = array.includes(NaN);
-
-console.log(result); // Output: true
-```
-
-- As, `array.includes()` uses different equality algorithm like `Same-value-zero equality`
-- `Object.is()` is similar to same-value equality, but `+0` and `-0` are considered equal
 
 ## Memoization
 
@@ -649,3 +690,156 @@ Caching for the first time, cache:  { '[10,20,30,40]': 110 }
 Returning from caching  { '[10,20,30,40]': 110, '[10,20,30]': 70 }
 70
 ```
+
+## Intersection Observer API
+
+- A
+
+## Javascript `Object.groupBy()`
+
+- If I want the following output:
+
+```txt
+{
+  scripting: [
+    { title: 'Javascript', type: 'scripting' },
+    { title: 'Java', type: 'scripting' }
+  ],
+  normal: [ { title: 'Python', type: 'normal' } ]
+}
+```
+
+- So, prepare that output in normal way:
+
+```js
+const languages = [
+  { title: 'Javascript', type: 'scripting' },
+  { title: 'Java', type: 'scripting' },
+  { title: 'Python', type: 'normal' },
+];
+
+let scriptingLanguages = {};
+languages.map((language) => {
+  const { type } = language;
+  if (scriptingLanguages[type] === undefined) {
+    scriptingLanguages[type] = [];
+  }
+
+  scriptingLanguages[type].push(language);
+});
+
+console.log(scriptingLanguages);
+```
+
+- But I can do the same work using `groupBy()` method
+- _NOTE:_ Node JS & chrome version should be latest
+- _NOTE:_ Need extra package `core-js` to run without Node JS latest version
+
+```cmd
+npm i core-js
+```
+
+```js
+require('core-js');
+
+let scriptingLanguages = {};
+scriptingLanguages = Object.groupBy(languages, (lang) => lang.type);
+console.log(scriptingLanguages);
+```
+
+## Event Delegation
+
+- Normally I can use multiple event listeners for multiple elements
+- But it's not working for adding another new element or for API
+- Must use event delegation in this case
+- _Condition of Event Delegation:_
+  - One event listener for multiple elements
+  - Should work that listener for adding another new element
+- That element also work with that same listener but no need to add extra event listener
+- _Why use event delegation?_
+  - The elements are visible through API
+  - The elements are updated dynamically
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+  </head>
+  <body>
+    <ul>
+      <li>Javascript</li>
+      <li>PHP</li>
+      <li>C++</li>
+      <li>C</li>
+      <li>Java</li>
+    </ul>
+    <button onclick="addNodeJS()">Add Node JS</button>
+    <script src="1.js"></script>
+  </body>
+</html>
+```
+
+```js
+// Grab the whole 'ul' element
+const ul = document.querySelector('ul');
+
+// Add click event on 'ul' element
+ul.addEventListener('click', (event) => {
+  // Find out 'li' element
+  if (event.target.matches('li')) {
+    // Perfect match on 'Javascript'
+    if (event.target.innerText === 'Javascript') {
+      event.target.style.backgroundColor = 'green';
+    } else {
+      event.target.style.backgroundColor = 'yellow';
+    }
+  }
+});
+
+// Event delegation on dynamic mode
+const addNodeJS = () => {
+  const newElement = document.createElement('li');
+  newElement.innerText = 'Node JS';
+  ul.appendChild(newElement);
+};
+```
+
+## Event Propagation
+
+- _Event Propagation:_ Execution order of all event listeners
+- _Event Bubbling:_ Event propagation moves from child to parant (default)
+- _Event Capturing or Trickling:_ Event propagation moves from parent to child
+
+## JavaScript `NaN`
+
+```js
+const weird = NaN;
+console.log(weird === weird); // Output: false
+```
+
+- Same as:
+
+```js
+const result1 = 'Sumit' / 5;
+const result2 = 'Bad programmer' / 3;
+
+console.log(result1); // Output: NaN
+console.log(result2); // Output: NaN
+
+console.log(result1 === result2); // Output: false
+```
+
+- Tricky interview question:
+
+```js
+const array = [NaN];
+const result = array.includes(NaN);
+
+console.log(result); // Output: true
+```
+
+- As, `array.includes()` uses different equality algorithm like `Same-value-zero equality`
+- `Object.is()` is similar to same-value equality, but `+0` and `-0` are considered equal
