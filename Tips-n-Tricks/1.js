@@ -1,19 +1,11 @@
-const ul = document.querySelector('ul');
+const main = document.querySelector('main');
+const div = document.querySelector('div');
+const button = document.querySelector('button');
 
-ul.addEventListener('click', (event) => {
-  console.log(event.target.value);
-
-  if (event.target.matches('li')) {
-    if (event.target.innerText === 'Javascript') {
-      event.target.style.backgroundColor = 'green';
-    } else {
-      event.target.style.backgroundColor = 'yellow';
-    }
-  }
-});
-
-const addNodeJS = () => {
-  const newElement = document.createElement('li');
-  newElement.innerText = 'Node JS';
-  ul.appendChild(newElement);
+const listener = (event) => {
+  console.log(event.currentTarget);
 };
+
+main.addEventListener('click', listener, { capture: true });
+div.addEventListener('click', listener, { capture: true });
+button.addEventListener('click', listener, { capture: true });

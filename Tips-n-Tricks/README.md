@@ -809,9 +809,142 @@ const addNodeJS = () => {
 
 ## Event Propagation
 
-- _Event Propagation:_ Execution order of all event listeners
+- _Event Propagation:_ Execution order of all the event listeners
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+  </head>
+  <body>
+    <main>
+      <div>
+        <button>Click Here</button>
+      </div>
+    </main>
+    <script src="1.js"></script>
+  </body>
+</html>
+```
+
+```js
+const main = document.querySelector('main');
+const div = document.querySelector('div');
+const button = document.querySelector('button');
+
+const listener = (event) => {
+  console.log(event.target);
+};
+
+main.addEventListener('click', listener);
+div.addEventListener('click', listener);
+button.addEventListener('click', listener);
+```
+
+- Output:
+
+```txt
+<button>Click Here</button>
+<button>Click Here</button>
+<button>Click Here</button>
+```
+
+- As, `event.target` refers to which element is being clicked
+- I have clicked on the button so that `Click Here` is printed three times
+- But use `event.currentTarget`:
+
+```js
+const listener = (event) => {
+  console.log(event.currentTarget);
+};
+```
+
+- Output:
+
+```txt
+<button>Click Here</button>
+<div>...</div>
+<main>...</main>
+```
+
+- So, printing order is from child to parent
+- It's by default & called event bubbling
 - _Event Bubbling:_ Event propagation moves from child to parant (default)
+- `event.currentTarget` refers to the element itself
+- `this` refers to the element itself
+
+```js
+const listener = (event) => {
+  console.log(this); // Pointing to 'event.currentTarget'
+};
+```
+
+- Output:
+
+```txt
+<button>Click Here</button>
+<div>...</div>
+<main>...</main>
+```
+
 - _Event Capturing or Trickling:_ Event propagation moves from parent to child
+- It's opposite of Event Bubbling
+- Need to add 3rd parameter like `{ capture: true }`
+
+```js
+const listener = (event) => {
+  console.log(event.currentTarget);
+};
+
+main.addEventListener('click', listener, { capture: true });
+div.addEventListener('click', listener, { capture: true });
+button.addEventListener('click', listener, { capture: true });
+```
+
+- Output:
+
+```txt
+<main>...</main>
+<div>...</div>
+<button>Click Here</button>
+```
+
+- Looks similar:
+
+```js
+main.addEventListener('click', listener, true);
+```
+
+- _Tricky interview question:_
+- If the flow should be: `DIV > BUTTON > FORM`
+
+```js
+const listener = (event) => {
+  console.log(event.currentTarget);
+};
+
+main.addEventListener('click', listener);
+div.addEventListener('click', listener, true);
+button.addEventListener('click', listener);
+```
+
+- Output:
+
+```txt
+<div>...</div>
+<button>Click Here</button>
+<main>...</main>
+```
+
+- _Explain:_
+- While clicking on the button, Event Capturing is occuring as `div` element
+- So, `div` hits first
+- After that move to 3rd element as Event Capturing
+- Now, `button` hits as Event Bubbling is occuring
+- So, moves to `main` element
 
 ## JavaScript `NaN`
 
@@ -832,7 +965,7 @@ console.log(result2); // Output: NaN
 console.log(result1 === result2); // Output: false
 ```
 
-- Tricky interview question:
+- _Tricky interview question:_
 
 ```js
 const array = [NaN];
