@@ -1,11 +1,11 @@
-const main = document.querySelector('main');
-const div = document.querySelector('div');
-const button = document.querySelector('button');
+var num1 = 1;
 
-const listener = (event) => {
-  console.log(event.currentTarget);
+var sum = function () {
+  var num2 = 2;
+  return function () {
+    return num1 + num2;
+  };
 };
 
-main.addEventListener('click', listener, { capture: true });
-div.addEventListener('click', listener, { capture: true });
-button.addEventListener('click', listener, { capture: true });
+var myfunc = sum();
+console.dir(myfunc);
