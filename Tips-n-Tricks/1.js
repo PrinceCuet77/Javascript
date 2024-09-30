@@ -1,11 +1,19 @@
-var num1 = 1;
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
 
-var sum = function () {
-  var num2 = 2;
-  return function () {
-    return num1 + num2;
-  };
-};
+  eat() {
+    console.log('Person is eating.');
+  }
 
-var myfunc = sum();
-console.dir(myfunc);
+  sleep() {
+    console.log('Person is sleeping.');
+  }
+}
+
+
+
+const sakib = new Person('Sakib', 35);
+sakib.eat(); // Output: Person is eating.
