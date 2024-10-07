@@ -12,6 +12,9 @@
     - [`Window` Binding](#window-binding)
   - [Execution Context](#execution-context)
   - [Higher Order Functions](#higher-order-functions)
+  - [Primitive vs Reference](#primitive-vs-reference)
+  - [Best Practices Of JavaScript](#best-practices-of-javascript)
+  - [ES6 Symbols](#es6-symbols)
 
 ## Closures
 
@@ -421,7 +424,7 @@ printName();
 ## Higher Order Functions
 
 - _Higher Order Function:_
-  - Passing more than one functions as an arguments
+  - Passing a functions to another function as an arguments
   - Returning one function from another function
   - Or both properties can be present at the same time
 - _Example: 01_
@@ -456,3 +459,24 @@ const result = myMap(languages, (language) => {
 console.log(result);
 // Output: [10, 6, 4, 3];
 ```
+
+## Primitive vs Reference
+
+- Every referance value comes from a master object
+
+![Primitive & Reference](photo/primitive-reference.png)
+
+- Primitive types store themself like `Stack` data structure
+
+![How Primitive values store in memory](photo/primitive-store-values.png)
+
+- Reference types store themself like `Heap` data structure
+- `Heap` stores randomly in its memory
+
+## Best Practices Of JavaScript
+
+- A
+
+## ES6 Symbols
+
+- A
