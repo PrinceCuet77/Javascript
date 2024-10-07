@@ -13,6 +13,8 @@
   - [Execution Context](#execution-context)
   - [Higher Order Functions](#higher-order-functions)
   - [Primitive vs Reference](#primitive-vs-reference)
+    - [Mutable Copy vs Immutable Copy vs Deep copy](#mutable-copy-vs-immutable-copy-vs-deep-copy)
+    - [Pass by reference](#pass-by-reference)
   - [Best Practices Of JavaScript](#best-practices-of-javascript)
   - [ES6 Symbols](#es6-symbols)
 
@@ -471,7 +473,175 @@ console.log(result);
 ![How Primitive values store in memory](photo/primitive-store-values.png)
 
 - Reference types store themself like `Heap` data structure
-- `Heap` stores randomly in its memory
+
+![How Reference values store in memory](photo/reference-stores-value.png)
+
+- _Example: 01_
+
+```js
+let person = {
+  name: 'Sakib',
+  age: 32,
+};
+
+let player = person; // Assignment
+
+console.log('Before any change:');
+console.log(person); // Output: { name: 'Sakib', age: 32 }
+console.log(player); // Output: { name: 'Sakib', age: 32 }
+
+// After any change
+player.name = 'Tamim';
+
+console.log('After any change:');
+console.log(person); // Output: { name: 'Tamim', age: 32 }
+console.log(player); // Output: { name: 'Tamim', age: 32 }
+
+// Update or modify or mutate or change
+person = {};
+
+console.log('After mutation:');
+console.log(person); // Output: {}
+console.log(player); // Output: { name: 'Tamim', age: 32 }
+```
+
+- _Note:_ After assignment of reference values, two reference values will be pointing to the same untill further assignment
+- _Example: 02_
+
+```js
+let player = ['Sakib', 'Tamim'];
+let anotherPlayer = player; // Assignment
+
+player.push('Shanto');
+
+console.log('After first assignment:');
+console.log(player); // Output: [ 'Sakib', 'Tamim', 'Shanto' ]
+console.log(anotherPlayer); // Output: [ 'Sakib', 'Tamim', 'Shanto' ]
+
+player = [];
+
+console.log('After mutation:');
+console.log(player); // Output: []
+console.log(anotherPlayer); // Output: [ 'Sakib', 'Tamim', 'Shanto' ]
+```
+
+### Mutable Copy vs Immutable Copy vs Deep copy
+
+- _Mutable copy:_
+
+```js
+const person = {
+  name: 'Sakib',
+  age: 32,
+};
+
+const person1 = person; // Mutable copy (If changes then other will change too)
+
+person.name = 'Tamim';
+
+console.log(person); // Output: { name: 'Tamim', age: 32 }
+console.log(person1); // Output: { name: 'Tamim', age: 32 }
+```
+
+- _Immutable copy:_
+
+```js
+const person = {
+  name: 'Sakib',
+  age: 32,
+};
+
+const person1 = { ...person }; // Immutable copy (If changes then other won't)
+
+person.name = 'Shanto';
+
+console.log(person); // Output: { name: 'Shanto', age: 32 }
+console.log(person1); // Output: { name: 'Tamim', age: 32 }
+```
+
+- But immutable copy can't be used for nested of nested object
+- It can be used only one nested object
+- _For example:_
+
+```js
+const person = {
+  name: 'Sakib',
+  age: 32,
+  favFood: ['Mango', 'Banana'],
+};
+
+const person1 = { ...person };
+
+person.favFood.push('Kiwi');
+
+console.log(person); // Output: { name: 'Sakib', age: 32, favFood: [ 'Mango', 'Banana', 'Kiwi' ] }
+console.log(person1); // Output: { name: 'Sakib', age: 32, favFood: [ 'Mango', 'Banana', 'Kiwi' ] }
+```
+
+- _Using `lodash`:_
+- Use `lodash` cdn
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Lodash CDN -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/javascript" src="prototypes.js"></script>
+  </body>
+</html>
+```
+
+- Now the same previous example:
+
+```js
+const person = {
+  name: 'Sakib',
+  age: 32,
+  favFood: ['Mango', 'Banana'],
+};
+
+// const person1 = { ...person };
+const person1 = _.cloneDeep(person);
+
+person.favFood.push('Kiwi');
+
+console.log(person);
+console.log(person1); // Not updated in nested reference type value
+```
+
+- Output:
+
+![Lodash Deep Clone](photo/lodash-output.png)
+
+- I can make reference type of 3 primitive type values
+- Like `String`, `Array`, `Boolean`
+
+```js
+const str = new String('Bangladesh');
+console.log(str); // Output: Bangladesh
+
+const arrValue = new Array([1, 2, 3, 4, 5, 6, 7, 8]);
+console.log(arrValue); // Output: [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+
+const flag = new Boolean(true);
+console.log(flag); // Ouptut: [Boolean: true]
+```
+
+- _Why?_
+- As JS stores all the built-in functions in this object's prototypes
+
+### Pass by reference
+
+- A
 
 ## Best Practices Of JavaScript
 
