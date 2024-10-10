@@ -16,6 +16,12 @@
     - [Mutable Copy vs Immutable Copy vs Deep copy](#mutable-copy-vs-immutable-copy-vs-deep-copy)
     - [Pass by reference](#pass-by-reference)
   - [Best Practices Of JavaScript](#best-practices-of-javascript)
+    - [Default Object Value](#default-object-value)
+    - [A2](#a2)
+    - [A3](#a3)
+    - [A4](#a4)
+    - [IIFE](#iife)
+    - [Module Pattern](#module-pattern)
   - [ES6 Symbols](#es6-symbols)
 
 ## Closures
@@ -641,11 +647,134 @@ console.log(flag); // Ouptut: [Boolean: true]
 
 ### Pass by reference
 
-- A
+- Passing a parameter in a function occurs pass by reference (always)
+- Inside a function, mutate any property of the object, actually change after calling the function
+
+```js
+const obj = {
+  value: 1,
+};
+
+function myFunc(newObj) {
+  newObj.value = 2;
+}
+
+console.log(obj); // Output: { value: 1 }
+myFunc(obj);
+console.log(obj); // Output: { value: 2 }
+```
 
 ## Best Practices Of JavaScript
 
+### Default Object Value
+
+- Previously used approach:
+
+```js
+// BAD
+const shapeConfig = {
+  type: 'object',
+  width: 150,
+  height: null,
+};
+
+function createShape(config) {
+  config.type = config.type || 'circle';
+  config.width = config.width || 300;
+  config.height = config.height || 300;
+
+  console.log(config); // Output:  { type: 'object', width: 150, height: 300 }
+}
+
+createShape(shapeConfig);
+console.log(shapeConfig); // Output:  { type: 'object', width: 150, height: 300 }
+```
+
+- But I can use `Object.assign`
+
+```js
+// GOOD
+const shapeConfig = {
+  type: 'object',
+  width: 150,
+  // height: null,
+};
+
+function createShape(config) {
+  config = Object.assign(
+    {
+      type: 'circle',
+      width: 150,
+      height: 100,
+    },
+    config
+  );
+
+  console.log(config); // Output:  { type: 'object', width: 150, height: 300 }
+}
+
+createShape(shapeConfig);
+console.log(shapeConfig); // Output:  { type: 'object', width: 150 }
+```
+
+### A2
+
 - A
+
+### A3
+
+- A
+
+### A4
+
+- A
+
+### IIFE
+
+- _IIFE:_ Immediately Invoke Function Expression
+
+```js
+(function (name) {
+  console.log(`Hello from ${name}`);
+})('Sakib');
+```
+
+- Output:
+
+```txt
+Hello from Sakib
+```
+
+### Module Pattern
+
+- Prepare that module automatically as it's IIFE
+- And use that variable with dot notation as IIFE returns object
+
+```js
+const myModule = (function () {
+  let current = null;
+  function init() {
+    // do something
+    console.log('init');
+  }
+
+  function change() {
+    // do something
+  }
+
+  function verify() {
+    // do something
+  }
+
+  return {
+    init,
+    change,
+    newCurrent: current,
+  };
+})();
+
+myModule.init();
+```
 
 ## ES6 Symbols
 

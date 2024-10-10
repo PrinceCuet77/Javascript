@@ -25,16 +25,25 @@
 // const sakib = Person('sakib', 32);
 // const tamim = Person('tamim', 22);
 
-const person = {
-  name: 'Sakib',
-  age: 32,
-  favFood: ['Mango', 'Banana'],
+// GOOD
+const shapeConfig = {
+  type: 'object',
+  width: 150,
+  // height: null,
 };
 
-// const person1 = { ...person };
-const person1 = _.cloneDeep(person);
+function createShape(config) {
+  config = Object.assign(
+    {
+      type: 'circle',
+      width: 150,
+      height: 100,
+    },
+    config
+  );
 
-person.favFood.push('Kiwi');
+  console.log(config); // Output:  { type: 'object', width: 150, height: 300 }
+}
 
-console.log(person); // Output: { name: 'Sakib', age: 32, favFood: [ 'Mango', 'Banana', 'Kiwi' ] }
-console.log(person1); // Output: { name: 'Sakib', age: 32, favFood: [ 'Mango', 'Banana', 'Kiwi' ] }
+createShape(shapeConfig);
+console.log(shapeConfig); // Output:  { type: 'object', width: 150 }
