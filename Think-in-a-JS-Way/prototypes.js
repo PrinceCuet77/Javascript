@@ -25,25 +25,6 @@
 // const sakib = Person('sakib', 32);
 // const tamim = Person('tamim', 22);
 
-// GOOD
-const shapeConfig = {
-  type: 'object',
-  width: 150,
-  // height: null,
-};
+const multiply = (a) => (b) => (c) => a * b * c;
 
-function createShape(config) {
-  config = Object.assign(
-    {
-      type: 'circle',
-      width: 150,
-      height: 100,
-    },
-    config
-  );
-
-  console.log(config); // Output:  { type: 'object', width: 150, height: 300 }
-}
-
-createShape(shapeConfig);
-console.log(shapeConfig); // Output:  { type: 'object', width: 150 }
+console.log(multiply(2)(3)(4)) // 24

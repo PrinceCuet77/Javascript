@@ -17,12 +17,13 @@
     - [Pass by reference](#pass-by-reference)
   - [Best Practices Of JavaScript](#best-practices-of-javascript)
     - [Default Object Value](#default-object-value)
-    - [A2](#a2)
-    - [A3](#a3)
-    - [A4](#a4)
+    - [Don't Pollute Prototype](#dont-pollute-prototype)
+    - [Method Chaining](#method-chaining)
+    - [Prototype Methods](#prototype-methods)
     - [IIFE](#iife)
     - [Module Pattern](#module-pattern)
-  - [ES6 Symbols](#es6-symbols)
+  - [Currying](#currying)
+    - [Currying Using Arrow Function](#currying-using-arrow-function)
 
 ## Closures
 
@@ -691,6 +692,8 @@ console.log(shapeConfig); // Output:  { type: 'object', width: 150, height: 300 
 ```
 
 - But I can use `Object.assign`
+- _Structure:_ `Object.assign(target, source)`
+- If something is missing in `source` then takes the missing part from `target` object
 
 ```js
 // GOOD
@@ -710,6 +713,7 @@ function createShape(config) {
     config
   );
 
+  // Fillup using 'height' from 'target' object
   console.log(config); // Output:  { type: 'object', width: 150, height: 300 }
 }
 
@@ -717,17 +721,149 @@ createShape(shapeConfig);
 console.log(shapeConfig); // Output:  { type: 'object', width: 150 }
 ```
 
-### A2
+- In `config`, `height` is missing, so takes from `target`
 
-- A
+### Don't Pollute Prototype
 
-### A3
+- _Bad Practices:_
+- Why?
+- As by default `prototype` stores all the built-in values
+- So, bad practice is to insert our customize function on it
 
-- A
+```js
+Array.prototype.myFunction = function myFunction() {
+  // Implementation
+};
+```
 
-### A4
+- _Good Practices:_
+- Create my own array & `extends` built-in `Array` class & insert my customized function
 
-- A
+```js
+class MyArray extends Array {
+  myFunction() {
+    // Implementation
+  }
+}
+```
+
+### Method Chaining
+
+- _Bad Practices:_
+- Call every function one by one
+
+```js
+class Product {
+  constructor(name) {
+    this.name = name;
+  }
+
+  setUnits(units) {
+    this.units = units;
+  }
+
+  setPrice(price) {
+    this.price = price;
+  }
+
+  save() {
+    console.log(this.name, this.price, this.units);
+  }
+}
+
+const product = new Product('Bag');
+
+product.setPrice(23.99);
+product.setUnits(12);
+product.save();
+```
+
+- _Good Practices:_ Using method chaining
+
+```js
+class Product {
+  constructor(name) {
+    this.name = name;
+  }
+
+  setUnits(units) {
+    this.units = units;
+    return this; // Change
+  }
+
+  setPrice(price) {
+    this.price = price;
+    return this; // Change
+  }
+
+  save() {
+    console.log(this.name, this.price, this.units);
+  }
+}
+
+const product = new Product('Bag');
+
+product.setPrice(23.99).setUnits(12).save(); // Method chaining
+```
+
+### Prototype Methods
+
+- Every function is a constructor by default
+- _Bad Practices:_
+- Why?
+- As every object created by a constructor function carry all the common functions which kills memory
+
+```js
+function Player(name, age) {
+  this.name = name;
+  this.age = age;
+
+  this.play = function () {
+    console.log('Playing...');
+  };
+}
+
+const sakib = new Player('sakib', 32);
+const tamim = new Player('tamim', 22);
+
+console.log(sakib);
+console.log(tamim);
+```
+
+- Output:
+
+```txt
+Player { name: 'sakib', age: 32, play: [Function (anonymous)] }
+Player { name: 'tamim', age: 22, play: [Function (anonymous)] }
+```
+
+- _Good Practices:_
+- Now, I can only assign properties to objects
+- And all the common methods are implemented using prototype methods
+
+```js
+function Player(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Player.prototype.play = function () {
+  console.log('Playing...');
+};
+
+const sakib = new Player('sakib', 32);
+const tamim = new Player('tamim', 22);
+
+console.log(sakib);
+console.log(tamim);
+```
+
+- Output:
+
+```txt
+Player { name: 'sakib', age: 32 }
+Player { name: 'tamim', age: 22 }
+```
 
 ### IIFE
 
@@ -776,6 +912,84 @@ const myModule = (function () {
 myModule.init();
 ```
 
-## ES6 Symbols
+## Currying
 
+- Functional programming pattern
+- Converting from a function which takes multiple arguments into a single argument functions
+- Normal function:
+
+```js
+function multiply(a, b, c) {
+  return a * b * c;
+}
+
+console.log(multiply(2, 3, 5)); // 30
+```
+
+- _Curried Function:_
+
+```js
+function curriedMultiply(a) {
+  return function (b) {
+    return function (c) {
+      return a * b * c;
+    };
+  };
+}
+
+// 2nd way to call curried function
+console.log(curriedMultiply(5)(3)(2)); //  30
+
+// 2nd way to call curried function
+const step1 = curriedMultiply(5);
+const step2 = step1(3);
+const step3 = step2(2);
+console.log(step3); // 30
+```
+
+- _Usecase:_
+- Use declarative way
+
+```js
+function discount(disc) {
+  return function (price) {
+    return price - price * disc;
+  };
+}
+
+const tenPercent = discount(0.1);
+const customer1D = tenPercent(1000);
+console.log(customer1D); // 900
+
+const twentyPercent = discount(0.2);
+const customer2D = twentyPercent(1000);
+console.log(customer2D); // 800
+```
+
+- _Partial Function:_ A currying is a combination of multiple partial functions
+- So, `discount` & `tenPercent` both are partial functions
 - A
+
+### Currying Using Arrow Function
+
+- Main function
+
+```js
+function multiply(a) {
+  return function (b) {
+    return function (c) {
+      return a * b * c;
+    };
+  };
+}
+
+console.log(multiply(2)(3)(4)) // 24
+```
+
+- Currying using arrow function
+
+```js
+const multiply = (a) => (b) => (c) => a * b * c;
+
+console.log(multiply(2)(3)(4)) // 24
+```
