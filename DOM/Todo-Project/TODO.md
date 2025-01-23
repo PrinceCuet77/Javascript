@@ -1,1 +1,4 @@
-README.md file
+- [ ] Write a todo
+- [ ] Store in incomplete task
+- [ ] After clicking the checkbox, move to completed tasks
+- [ ] After clicking `Delete` button, remove from the list

@@ -3,7 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo List</title>
+    <meta name="author" content="Sumit Saha, Learn with Sumit" />
+    <meta name="description" content="We love JavaScript" />
+    <title>DOM - Document Object Model</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <section class="container">
+      <h1 id="header" class="header">Todo Application</h1>
+
+      <form class="new-task-container box">
+        <input type="text" id="new-task" />
+        <input type="submit" id="addTask" value="Add Task" />
+        <!-- <input type="submit" id="editTask" value="Edit Task" /> -->
+      </form>
+
+      <div class="todo-list box">
+        <h2>Pending Tasks</h2>
+        <ul id="items">
+          <li class="item">
+            <input type="checkbox" /><label>Task 1</label
+            ><button class="edit">
+              <img src="icons/edit.png" alt="edit" />
+            </button>
+          </li>
+          <li class="item">
+            <input type="checkbox" /><label>Task 2</label
+            ><button class="edit">
+              <img src="icons/edit.png" alt="edit" />
+            </button>
+          </li>
+          <li class="item">
+            <input type="checkbox" /><label>Task 3</label
+            ><button class="edit">
+              <img src="icons/edit.png" alt="edit" />
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!--/todo-list-->
+
+      <div class="complete-list box">
+        <h2>Completed Tasks</h2>
+        <ul>
+          <li class="item">
+            Task 4
+            <button class="delete">
+              <img src="icons/delete.png" alt="Delete" />
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!--/complete-list-->
+    </section>
+    <!--/container-->
+    <script src="script.js"></script>
+  </body>
 </html>

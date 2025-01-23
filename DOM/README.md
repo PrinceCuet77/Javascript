@@ -12,6 +12,7 @@
   - Add HTML elements & attributes
   - Remove HTML elements & attributes
   - React to HTML events
+  - Create new HTML events
 - So the overall concepts refer to `POEM`
   - P - Property
   - O - Object
