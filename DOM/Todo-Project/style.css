@@ -70,6 +70,7 @@ h2 {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+  display: none;
 }
 
 #new-task:focus {
@@ -147,7 +148,7 @@ li {
   cursor: pointer;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: 15px;
   height: 15px;
   margin: 5px;
