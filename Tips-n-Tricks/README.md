@@ -19,15 +19,14 @@
   - [_Question-15:_ Output of `[] + []`](#question-15-output-of---)
   - [_Question-16:_ Output of the function? - Template Literals](#question-16-output-of-the-function---template-literals)
   - [_Question-17:_ Output of the function? - `arguments`](#question-17-output-of-the-function---arguments)
-  - [_Question-18:_](#question-18)
-  - [_Question-19:_](#question-19)
+  - [_Question-18:_ What is the output of `a[a](01)`?](#question-18-what-is-the-output-of-aa01)
+  - [_Question-19:_ What is the output of `0.1 + 0.2`?](#question-19-what-is-the-output-of-01--02)
   - [_Question-20:_](#question-20)
-  - [_Question-21:_](#question-21)
-  - [_Question-22:_](#question-22)
-  - [_Question-23:_ Count duplicate elements in an array](#question-23-count-duplicate-elements-in-an-array)
-  - [_Question-24:_ Reverse words in a string](#question-24-reverse-words-in-a-string)
-  - [_Question-25:_ Sorting words by length in a sentence](#question-25-sorting-words-by-length-in-a-sentence)
-  - [_Question-26:_ Sorting words by length in a sentence](#question-26-sorting-words-by-length-in-a-sentence)
+  - [_Question-21:_ Make a function that sorts its arguments without using loops](#question-21-make-a-function-that-sorts-its-arguments-without-using-loops)
+  - [_Question-22:_ Count duplicate elements in an array](#question-22-count-duplicate-elements-in-an-array)
+  - [_Question-23:_ Reverse words in a string](#question-23-reverse-words-in-a-string)
+  - [_Question-24:_ Sorting words by length in a sentence](#question-24-sorting-words-by-length-in-a-sentence)
+  - [_Question-25:_ `setTimeout` along with `Promise()`](#question-25-settimeout-along-with-promise)
   - [Debounce Handling](#debounce-handling)
   - [Memoization](#memoization)
   - [Intersection Observer API](#intersection-observer-api)
@@ -400,27 +399,75 @@ let value = {
 value.method(fn, 5); // Output: The length is 2
 ```
 
-## _Question-18:_
+## _Question-18:_ What is the output of `a[a](01)`?
 
-- A
+```js
+const a = 'constructor';
+console.log(a[a](01));
+console.log(a[a](11));
+```
 
-## _Question-19:_
+- Output:
 
-- A
+```js
+1;
+11;
+```
+
+- _Reason:_
+- `a[a]` refers to a constructor function of a string
+- Which returns a string in object literal format (`new String()`)
+- So, `a[a](01)` is nothing but `new String(01)` which returns `1`
+- More clarification:
+
+![constructor](photo/constructor.png)
+
+## _Question-19:_ What is the output of `0.1 + 0.2`?
+
+- It can't find the right output as JS use base 2 numerical system
+- So, they are infinitely repeating fractions in base 2
 
 ## _Question-20:_
 
-- A
+- Code:
 
-## _Question-21:_
+```js
+console.log('bangladesh'.__proto__);
+console.log('bangladesh'.__proto__.__proto__);
+console.log('bangladesh'.__proto__.__proto__.__proto__);
+```
 
-- A
+- Output:
 
-## _Question-22:_
+```txt
+String (Object literal - new String())
+Object (master object where String comes from)
+null
+```
 
-- A
+## _Question-21:_ Make a function that sorts its arguments without using loops
 
-## _Question-23:_ Count duplicate elements in an array
+- Code:
+
+```js
+const myFunc = function () {
+  return [].slice.call(arguments).sort();
+};
+
+console.log(myFunc(2, 1, 4, 3));
+```
+
+- Output:
+
+```txt
+[1, 2, 3, 4]
+```
+
+- `[].slice` is used to use the `slice` method
+- `call()` is used to pass the parameter in the `slice` method
+- `sort()` is used to sort the array produced by `[].slice.call(arguments)`
+
+## _Question-22:_ Count duplicate elements in an array
 
 - Input:
 
@@ -431,7 +478,7 @@ value.method(fn, 5); // Output: The length is 2
 - Output:
 
 ```txt
-{ 'A': 3, 'B': 1, 'C': 2, 'D': 1 'F': 2 }
+{ 'A': 3, 'B': 1, 'C': 2, 'D': 1, 'F': 2 }
 ```
 
 - Code:
@@ -453,7 +500,7 @@ function countDuplicates(data) {
 console.log(countDuplicates(letters));
 ```
 
-## _Question-24:_ Reverse words in a string
+## _Question-23:_ Reverse words in a string
 
 - Input:
 
@@ -485,7 +532,7 @@ function reverseWords(data) {
 console.log(reverseWords(str));
 ```
 
-## _Question-25:_ Sorting words by length in a sentence
+## _Question-24:_ Sorting words by length in a sentence
 
 - Input:
 
@@ -517,7 +564,7 @@ function sortWords(data) {
 console.log(sortWords(str));
 ```
 
-## _Question-26:_ Sorting words by length in a sentence
+## _Question-25:_ `setTimeout` along with `Promise()`
 
 - `var i` - functional scope
 - `let i` - block scope
@@ -749,6 +796,8 @@ console.log(scriptingLanguages);
 
 ## Event Delegation
 
+![Event Delegation](photo/event-delegation.png)
+
 - Normally I can use multiple event listeners for multiple elements
 - But it's not working for adding another new element or for API
 - Must use event delegation in this case
@@ -919,7 +968,7 @@ main.addEventListener('click', listener, true);
 ```
 
 - _Tricky interview question:_
-- If the flow should be: `DIV > BUTTON > FORM`
+- If the flow should be: `DIV > BUTTON > MAIN`
 
 ```js
 const listener = (event) => {
