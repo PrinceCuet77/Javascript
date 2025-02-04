@@ -9,48 +9,48 @@
 
 ```js
 const display = (sum) => {
-  console.log(`The result is : ${sum}`)
-}
+  console.log(`The result is : ${sum}`);
+};
 
 const calculate = (value1, value2) => {
-  const sum = value1 + value2
-  return sum
-}
+  const sum = value1 + value2;
+  return sum;
+};
 
-const result = calculate(4, 5)
-display(result) // Output: The result is : 9
-```
-
-- Using callback function
-
-```js
-const display = (sum) => {
-  console.log(`The result is : ${sum}`)
-}
-
-const calculate = (value1, value2, callback) => {
-  const sum = value1 + value2
-
-  // Use callback function
-  if (callback) callback(sum)
-}
-
-calculate(4, 5, display) // Output: The result is : 9
+const result = calculate(4, 5);
+display(result); // Output: The result is : 9
 ```
 
 - Using callback function as anonymous function
 
 ```js
+const display = (sum) => {
+  console.log(`The result is : ${sum}`);
+};
+
 const calculate = (value1, value2, callback) => {
-  const sum = value1 + value2
+  const sum = value1 + value2;
+
+  // Use callback function
+  if (callback) callback(sum);
+};
+
+calculate(4, 5, display); // Output: The result is : 9
+```
+
+- Using callback function as anonymous function differently
+
+```js
+const calculate = (value1, value2, callback) => {
+  const sum = value1 + value2;
 
   // Calling anonymous callback function
-  if (callback) callback(sum)
-}
+  if (callback) callback(sum);
+};
 
 calculate(4, 5, function (sum) {
-  console.log(`The result is : ${sum}`)
-}) // Output: The result is : 9
+  console.log(`The result is : ${sum}`);
+}); // Output: The result is : 9
 ```
 
 - So, `callback` argument is pointing the following anonymous function
@@ -65,63 +65,63 @@ function (sum) {
 
 ```js
 const calculate = (value1, value2, callback) => {
-  const sum = value1 + value2
+  const sum = value1 + value2;
 
   // Calling arrow function
-  if (callback) callback(sum)
-}
+  if (callback) callback(sum);
+};
 
 calculate(4, 5, (sum) => {
-  console.log(`The result is : ${sum}`)
-}) // Output: The result is : 9
+  console.log(`The result is : ${sum}`);
+}); // Output: The result is : 9
 ```
 
 - So, `callback` argument is pointing the following arrow function
 
 ```js
-;(sum) => {
-  console.log(`The result is : ${sum}`)
-}
+(sum) => {
+  console.log(`The result is : ${sum}`);
+};
 ```
 
 - Callback example -
 
 ```js
-const paymentStatus = true
-const mark = 80
+const paymentStatus = true;
+const mark = 80;
 
 const enroll = (callback) => {
-  console.log('Enrollment is processing...')
+  console.log('Enrollment is processing...');
 
   setTimeout(() => {
-    if (paymentStatus) callback()
-    else console.log('Enrollment process is failed')
-  }, 2000)
-}
+    if (paymentStatus) callback();
+    else console.log('Enrollment process is failed');
+  }, 2000);
+};
 
 const progress = (callback) => {
-  console.log('Course on progress...')
+  console.log('Course on progress...');
 
   setTimeout(() => {
-    if (mark >= 80) callback()
+    if (mark >= 80) callback();
     else
       console.log(
         'You could not achieve enough marks for getting the certificate'
-      )
-  }, 3000)
-}
+      );
+  }, 3000);
+};
 
 const getCertificate = () => {
-  console.log('Preparing your certificate...')
+  console.log('Preparing your certificate...');
 
   setTimeout(() => {
-    console.log('Congratulation!!! You earn the certificate')
-  }, 2000)
-}
+    console.log('Congratulation!!! You earn the certificate');
+  }, 2000);
+};
 
 enroll(() => {
-  progress(getCertificate)
-})
+  progress(getCertificate);
+});
 ```
 
 - Outcome -
@@ -146,15 +146,15 @@ Congratulation!!! You earn the certificate
 - Inside `enroll` function I need to point `progress` function which takes a parameter, so use arrow function and inside that function call another function
 
 ```js
-;() => {
-  progress(getCertificate)
-}
+() => {
+  progress(getCertificate);
+};
 ```
 
-- But `progress` function doesn't take any parameter, so pass direct function name as callback function -
+- But `getCertificate` function doesn't take any parameter, so pass direct function name as callback function -
 
 ```js
-progress(getCertificate)
+progress(getCertificate);
 ```
 
 ### Promise
@@ -164,17 +164,17 @@ progress(getCertificate)
 - `Promise` is a constructor function
 
 ```js
-new Promise()
+new Promise();
 ```
 
 - Takes a function inside the constructor function
 
 ```js
 // Using normal function
-new Promise(function () {})
+new Promise(function () {});
 
 // Or using arrow function
-new Promise(() => {})
+new Promise(() => {});
 ```
 
 - That function takes two functions as a parameter named `resolve` & `reject` (convention)
@@ -182,25 +182,25 @@ new Promise(() => {})
 ```js
 // Using normal function
 // Takes 'resolve' & 'reject' functions
-new Promise(function (resolve, reject) {})
+new Promise(function (resolve, reject) {});
 
 // Or using arrow function
 // Takes 'resolve' & 'reject' functions
-new Promise((resolve, reject) => {})
+new Promise((resolve, reject) => {});
 ```
 
 - The concept is -
-- If `Promise` is completed or success, the `Promise` has been `resolve` or `resolve` function calls
-- Else the `Promise` has been `reject` or `reject` function calls
+- If `Promise` is completed or success, the `Promise` has been resolved or `resolve` function calls
+- Else the `Promise` has been rejected or `reject` function calls
 - `Promise` definition -
 
 ```js
 const promise = new Promise((resolve, reject) => {
   setTimeout(() => {
-    if (status) resolve('Task 1')
-    else reject(new Error('Error message'))
-  })
-})
+    if (status) resolve('Task 1');
+    else reject(new Error('Error message'));
+  });
+});
 ```
 
 - `Promise` calls -
@@ -208,11 +208,11 @@ const promise = new Promise((resolve, reject) => {
 ```js
 promise
   .then((res) => {
-    console.log(res)
+    console.log(res);
   })
   .catch((err) => {
-    console.log(err.message)
-  })
+    console.log(err.message);
+  });
 ```
 
 - Outcome if `resolve` -
@@ -237,57 +237,57 @@ Error message
 - Same mentioned callback example using `Promise`
 
 ```js
-const paymentStatus = true
-const mark = 90
+const paymentStatus = true;
+const mark = 90;
 
 // Use 'Promise' so it's an asynchronous function
 const enroll = () => {
-  console.log('Enrollment is processing...')
+  console.log('Enrollment is processing...');
 
   // Either 'resolve' nor 'reject'. No console.log use in 'Promise'
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (paymentStatus) resolve()
-      else reject(new Error('Enrollment process is failed'))
-    }, 2000)
-  })
-}
+      if (paymentStatus) resolve();
+      else reject(new Error('Enrollment process is failed'));
+    }, 2000);
+  });
+};
 
 const progress = () => {
-  console.log('Course on progress...')
+  console.log('Course on progress...');
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (mark >= 80) resolve()
+      if (mark >= 80) resolve();
       else
         reject(
           new Error(
             'You could not achieve enough marks for getting the certificate'
           )
-        )
-    }, 3000)
-  })
-}
+        );
+    }, 3000);
+  });
+};
 
 const getCertificate = () => {
-  console.log('Preparing your certificate...')
+  console.log('Preparing your certificate...');
 
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve('Congratulation!!! You earn the certificate')
-    }, 2000)
-  })
-}
+      resolve('Congratulation!!! You earn the certificate');
+    }, 2000);
+  });
+};
 
 enroll()
   .then(progress)
   .then(getCertificate)
   .then((res) => {
-    console.log(res)
+    console.log(res);
   })
   .catch((err) => {
-    console.log(err.message)
-  })
+    console.log(err.message);
+  });
 ```
 
 - Outcome -
@@ -314,7 +314,7 @@ Congratulation!!! You earn the certificate
 - Inside a `Promise`, if `resolve` doesn't take any parameter then call like -
 
 ```js
-enroll().then(progress)
+enroll().then(progress);
 ```
 
 - Basically pass next `Promise` in `then`
@@ -322,8 +322,8 @@ enroll().then(progress)
 
 ```js
 enroll().then((res) => {
-  console.log(res)
-})
+  console.log(res);
+});
 ```
 
 - Basically receive the parameter sent from `resolve`
@@ -334,26 +334,26 @@ enroll()
   .then(progress)
   .then(getCertificate)
   .then((res) => {
-    console.log(res)
+    console.log(res);
   })
   .catch((err) => {
-    console.log(err.message)
-  })
+    console.log(err.message);
+  });
 ```
 
-- Look at the next `Promise` example - 
+- Look at the next `Promise` example -
 
 ```js
-const promise1 = Promise.resolve('Promise 1 resolved')
+const promise1 = Promise.resolve('Promise 1 resolved');
 
 const promise2 = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve('Promise 2 resolved')
-  }, 2000)
-})
+    resolve('Promise 2 resolved');
+  }, 2000);
+});
 
-promise1.then((res) => console.log(res))
-promise2.then((res) => console.log(res))
+promise1.then((res) => console.log(res));
+promise2.then((res) => console.log(res));
 ```
 
 - Output -
@@ -368,17 +368,17 @@ Promise 2 resolved
 - Receive all the resolved data in the form of an array too
 
 ```js
-Promise.all([promise1, promise2]).then((res) => console.log(res))
+Promise.all([promise1, promise2]).then((res) => console.log(res));
 ```
 
 - Outcome will be the same
 - If I want to process all the `Promise`s but want to show output who resolved first, then use `Promise.race`
 
 ```js
-Promise.race([promise1, promise2]).then((res) => console.log(res))
+Promise.race([promise1, promise2]).then((res) => console.log(res));
 ```
 
-- Outcome - 
+- Outcome -
 
 ```text
 Promise 1 resolved
@@ -394,68 +394,68 @@ Promise 1 resolved
 async function myFunction() {}
 
 // Asynchronous arrow function
-const myFunction = async () => {}
+const myFunction = async () => {};
 ```
 
 - I can only use `await` inside `async` function
 - Same mentioned callback example using `async`
 
 ```js
-const paymentStatus = true
-const mark = 90
+const paymentStatus = true;
+const mark = 90;
 
 // Use 'Promise' so it's an asynchronous function
 const enroll = () => {
-  console.log('Enrollment is processing...')
+  console.log('Enrollment is processing...');
 
   // Either 'resolve' nor 'reject'. No console.log use
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (paymentStatus) resolve()
-      else reject(new Error('Enrollment process is failed'))
-    }, 2000)
-  })
-}
+      if (paymentStatus) resolve();
+      else reject(new Error('Enrollment process is failed'));
+    }, 2000);
+  });
+};
 
 const progress = () => {
-  console.log('Course on progress...')
+  console.log('Course on progress...');
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (mark >= 80) resolve()
+      if (mark >= 80) resolve();
       else
         reject(
           new Error(
             'You could not achieve enough marks for getting the certificate'
           )
-        )
-    }, 3000)
-  })
-}
+        );
+    }, 3000);
+  });
+};
 
 const getCertificate = () => {
-  console.log('Preparing your certificate...')
+  console.log('Preparing your certificate...');
 
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve('Congratulation!!! You earn the certificate')
-    }, 2000)
-  })
-}
+      resolve('Congratulation!!! You earn the certificate');
+    }, 2000);
+  });
+};
 
 const course = async () => {
   try {
-    await enroll()
-    await progress()
-    const message = await getCertificate()
+    await enroll();
+    await progress();
+    const message = await getCertificate();
 
-    console.log(message)
+    console.log(message);
   } catch (err) {
-    console.log(err.message)
+    console.log(err.message);
   }
-}
+};
 
-course()
+course();
 ```
 
 - Outcome will be the same
@@ -510,29 +510,29 @@ course()
 ```js
 // Printing the log
 const log = (anything) => {
-  console.log(anything)
-}
+  console.log(anything);
+};
 
-let customer = 'Customer 1'
+let customer = 'Customer 1';
 
 const processOrder = (customer) => {
-  log(`Move to kitchen and wait until the food is ready for ${customer}`)
+  log(`Move to kitchen and wait until the food is ready for ${customer}`);
 
-  let currentTime = new Date().getTime()
+  let currentTime = new Date().getTime();
   while (currentTime + 3000 >= new Date().getTime()) {}
 
-  log(`The food is ready and served to the ${customer}`)
-}
+  log(`The food is ready and served to the ${customer}`);
+};
 
-log(`Take order from ${customer}`)
-processOrder(customer)
-log(`Complete the order for ${customer}`)
+log(`Take order from ${customer}`);
+processOrder(customer);
+log(`Complete the order for ${customer}`);
 
-customer = 'customer 2'
+customer = 'customer 2';
 
-log(`Take order from ${customer}`)
-processOrder(customer)
-log(`Complete the order for ${customer}`)
+log(`Take order from ${customer}`);
+processOrder(customer);
+log(`Complete the order for ${customer}`);
 ```
 
 - Outcome -
@@ -561,33 +561,33 @@ Complete the order for customer 2
 ```js
 // Printing the log
 const log = (anything) => {
-  console.log(anything)
-}
+  console.log(anything);
+};
 
-let customer = 'Customer 1'
+let customer = 'Customer 1';
 
 const processOrder = (customer, orderTime) => {
-  log(`Move to kitchen and describe the order to chief for ${customer}`)
+  log(`Move to kitchen and describe the order to chief for ${customer}`);
 
   // Asynchronous function
   setTimeout(() => {
-    log(`The food is ready and served to the ${customer}`)
-  }, orderTime)
+    log(`The food is ready and served to the ${customer}`);
+  }, orderTime);
 
   log(
     `Complete the order for ${customer} and ${customer} needs to wait ${orderTime} seconds`
-  )
-}
+  );
+};
 
-log(`Take order from ${customer}`)
-processOrder(customer, 5000)
-log(`Waiter is free for taking next order from any customer`)
+log(`Take order from ${customer}`);
+processOrder(customer, 5000);
+log(`Waiter is free for taking next order from any customer`);
 
-customer = 'customer 2'
+customer = 'customer 2';
 
-log(`Take order from ${customer}`)
-processOrder(customer, 3000)
-log(`Waiter is free for taking next order from any customer`)
+log(`Take order from ${customer}`);
+processOrder(customer, 3000);
+log(`Waiter is free for taking next order from any customer`);
 ```
 
 - Outcome -
@@ -616,48 +616,48 @@ The food is ready and served to the Customer 1
 ```js
 // Printing the log
 const log = (anything) => {
-  console.log(anything)
-}
+  console.log(anything);
+};
 
 const processOrder = (customer, orderTime, callback) => {
-  log(`Move to kitchen and describe the order to chief for ${customer}`)
+  log(`Move to kitchen and describe the order to chief for ${customer}`);
 
   // Asynchronous function
   setTimeout(() => {
-    log(`The food is ready and served to the ${customer}`)
-  }, orderTime)
+    log(`The food is ready and served to the ${customer}`);
+  }, orderTime);
 
   log(
     `Complete the order for ${customer} and ${customer} needs to wait ${orderTime} seconds`
-  )
+  );
 
-  callback()
-}
+  callback();
+};
 
 const takeOrder = (customer, callback) => {
-  log(`Take order from ${customer}`)
-  callback()
-}
+  log(`Take order from ${customer}`);
+  callback();
+};
 
 const waiterFree = () => {
-  log(`Waiter is free for taking next order from any customer`)
-}
+  log(`Waiter is free for taking next order from any customer`);
+};
 
 // First callback pattern
-let customer = 'Customer 1'
+let customer = 'Customer 1';
 takeOrder(customer, () => {
   processOrder(customer, 5000, () => {
-    waiterFree()
-  })
-})
+    waiterFree();
+  });
+});
 
 // Second callback pattern
-customer = 'customer 2'
+customer = 'customer 2';
 takeOrder(customer, () => {
   processOrder(customer, 3000, () => {
-    waiterFree()
-  })
-})
+    waiterFree();
+  });
+});
 ```
 
 - Outcome -
@@ -684,19 +684,19 @@ The food is ready and served to the Customer 1
 - Another way to use callback pattern
 
 ```js
-let customer = 'Customer 1'
+let customer = 'Customer 1';
 takeOrder(customer, () => {
   processOrder(customer, 5000, () => {
-    waiterFree()
+    waiterFree();
 
-    customer = 'customer 2'
+    customer = 'customer 2';
     takeOrder(customer, () => {
       processOrder(customer, 3000, () => {
-        waiterFree()
-      })
-    })
-  })
-})
+        waiterFree();
+      });
+    });
+  });
+});
 ```
 
 - Output will be the same
@@ -713,55 +713,55 @@ const meeting = new Promise((resolve, reject) => {
       name: 'An JavaScript Interview Session',
       duration: '2 hours',
       time: '10:30 PM',
-    }
+    };
 
-    resolve(meetingDetails)
+    resolve(meetingDetails);
   } else {
-    reject(new Error('A meeting has already scheduled'))
+    reject(new Error('A meeting has already scheduled'));
   }
-})
+});
 ```
 
 - If only `resolve` is present in a `Promise`, then write like -
 
 ```js
-const promise = Promise.resolve(123)
+const promise = Promise.resolve(123);
 
 promise.then((res) => {
-  console.log(res) // Output: 123
-})
+  console.log(res); // Output: 123
+});
 ```
 
 - Or -
 
 ```js
 Promise.resolve(123).then((res) => {
-  console.log(res) // Output: 123
-})
+  console.log(res); // Output: 123
+});
 ```
 
 - If only `reject` is present in a `Promise`, then write like -
 
 ```js
-const promise = Promise.reject(new Error('fail'))
+const promise = Promise.reject(new Error('fail'));
 
 promise.catch((err) => {
-  console.log(err.message) // Output: fail
-})
+  console.log(err.message); // Output: fail
+});
 ```
 
 - Or -
 
 ```js
 Promise.reject(new Error('fail')).catch((err) => {
-  console.log(err.message) // Output: fail
-})
+  console.log(err.message); // Output: fail
+});
 ```
 
 - Creating a `Promise` -
 
 ```js
-const hasMeeting = false
+const hasMeeting = false;
 
 const meeting = new Promise((resolve, reject) => {
   if (!hasMeeting) {
@@ -769,21 +769,21 @@ const meeting = new Promise((resolve, reject) => {
       name: 'An JavaScript Interview Session',
       duration: '2 hours',
       time: '10:30 PM',
-    }
+    };
 
-    resolve(meetingDetails)
+    resolve(meetingDetails);
   } else {
-    reject(new Error('A meeting has already scheduled'))
+    reject(new Error('A meeting has already scheduled'));
   }
-})
+});
 
 meeting
   .then((res) => {
-    console.log(JSON.stringify(res))
+    console.log(JSON.stringify(res));
   })
   .catch((err) => {
-    console.log(err.message)
-  })
+    console.log(err.message);
+  });
 ```
 
 - If `Promise` is completed, the `Promise` has been `Resolved`
@@ -801,7 +801,7 @@ A meeting has already scheduled
 - Multiple `then` use -
 
 ```js
-const hasMeeting = false
+const hasMeeting = false;
 
 const meeting = new Promise((resolve, reject) => {
   if (!hasMeeting) {
@@ -809,29 +809,29 @@ const meeting = new Promise((resolve, reject) => {
       name: 'An JavaScript Interview Session',
       duration: '2 hours',
       time: '10:30 PM',
-    }
+    };
 
-    resolve(meetingDetails)
+    resolve(meetingDetails);
   } else {
-    reject(new Error('A meeting has already scheduled'))
+    reject(new Error('A meeting has already scheduled'));
   }
-})
+});
 
 const addToCalender = (meeting) => {
-  const calender = `I have a meeting titled ${meeting.name} at ${meeting.time}`
+  const calender = `I have a meeting titled ${meeting.name} at ${meeting.time}`;
 
   // No need to 'reject' a 'Promise'. So, use direct 'resolve'
-  return Promise.resolve(calender)
-}
+  return Promise.resolve(calender);
+};
 
 meeting
   .then(addToCalender)
   .then((res) => {
-    console.log(res)
+    console.log(res);
   })
   .catch((err) => {
-    console.log(err.message)
-  })
+    console.log(err.message);
+  });
 ```
 
 - If `Promise` is completed, the `Promise` has been `Resolved`
@@ -851,10 +851,12 @@ A meeting has already scheduled
 
 ### Async Await
 
+#### Example-01
+
 - Same `Promise` example completed using `async` function
 
 ```js
-const hasMeeting = false
+const hasMeeting = false;
 
 const meeting = new Promise((resolve, reject) => {
   if (!hasMeeting) {
@@ -862,34 +864,103 @@ const meeting = new Promise((resolve, reject) => {
       name: 'An JavaScript Interview Session',
       duration: '2 hours',
       time: '10:30 PM',
-    }
+    };
 
-    resolve(meetingDetails)
+    resolve(meetingDetails);
   } else {
-    reject(new Error('A meeting has already scheduled'))
+    reject(new Error('A meeting has already scheduled'));
   }
-})
+});
 
 const addToCalender = (meeting) => {
-  const calender = `I have a meeting titled ${meeting.name} at ${meeting.time}`
+  const calender = `I have a meeting titled ${meeting.name} at ${meeting.time}`;
 
   // No need to 'reject' a 'Promise'. So, use direct 'resolve'
-  return Promise.resolve(calender)
-}
+  return Promise.resolve(calender);
+};
 
 const meetingSchecule = async () => {
   try {
-    const meetingDetails = await meeting
-    const calender = await addToCalender(meetingDetails)
-    console.log(calender)
+    const meetingDetails = await meeting;
+    const calender = await addToCalender(meetingDetails);
+    console.log(calender);
   } catch (err) {
-    console.log(err.message)
+    console.log(err.message);
   }
-}
+};
 
-meetingSchecule()
+meetingSchecule();
 ```
 
 - Outcome will be the same
 - So, to make sure best performance, I need to use asynchronous approach
 - To ignore blocking behavior, I need to use asynchronous approach as much as possible
+
+#### Example-02
+
+- Reshape your code using `async` & `await`
+
+```js
+const delay = (duration) =>
+  new Promise((resolve) => setTimeout(resolve, duration));
+
+const log = (anything) => {
+  console.log(anything);
+};
+
+const processOrder = async (customer, orderTime) => {
+  log(`Move to kitchen and describe the order to chief for ${customer}`);
+
+  // Asynchronous function
+  await delay(orderTime);
+
+  log(`The food is ready and served to the ${customer}`);
+
+  log(
+    `Complete the order for ${customer} and ${customer} needs to wait ${orderTime} seconds`
+  );
+};
+
+const takeOrder = async (customer) => {
+  log(`Take order from ${customer}`);
+  return customer;
+};
+
+const waiterFree = () => {
+  log(`Waiter is free for taking next order from any customer`);
+};
+
+// Async-await model
+const serveCustomer = async (customer, orderTime) => {
+  await takeOrder(customer);
+  await processOrder(customer, orderTime);
+  waiterFree();
+};
+
+// Serve Customer 1
+serveCustomer('Customer 1', 5000);
+
+// Serve Customer 2
+serveCustomer('Customer 2', 3000);
+```
+
+- Output:
+
+```txt
+Take order from Customer 1
+Take order from Customer 2
+Move to kitchen and describe the order to chief for Customer 1
+Move to kitchen and describe the order to chief for Customer 2
+
+( --- pause for 3 seconds --- )
+
+The food is ready and served to the Customer 2
+Complete the order for Customer 2 and Customer 2 needs to wait 3000 seconds
+Waiter is free for taking next order from any customer
+
+( --- pause for 2 seconds --- )
+
+The food is ready and served to the Customer 1
+Complete the order for Customer 1 and Customer 1 needs to wait 5000 seconds
+Waiter is free for taking next order from any customer
+```

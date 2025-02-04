@@ -409,9 +409,9 @@ console.log(a[a](11));
 
 - Output:
 
-```js
-1;
-11;
+```txt
+1
+11
 ```
 
 - _Reason:_
