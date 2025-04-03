@@ -1,11 +1,13 @@
 const newTask = document.querySelector('#new-task');
+
+const form = document.querySelector('.new-task-container');
 const addTaskBtn = document.querySelector('#addTask');
 const editTaskBtn = document.querySelector('#editTask');
-const form = document.querySelector('.new-task-container');
+
 const pendingTask = document.querySelector('#items');
 const completedTask = document.querySelector('#complete-list');
+
 const editBtn = document.querySelector('li .edit img');
-console.log(editBtn);
 
 let isEditMode = false;
 let currentTask = null;
@@ -58,6 +60,19 @@ document.querySelectorAll('.complete-list .delete').forEach((button) => {
   });
 });
 
+// Alternate way to find the task item
+// document.querySelectorAll('.complete-list .delete').forEach((button) => {
+//   button.addEventListener('click', (event) => {
+//     let taskItem = button.parentNode; // Start with the button's parent
+//     while (taskItem && taskItem.tagName !== 'LI') {
+//       taskItem = taskItem.parentNode; // Traverse up until the <li> element is found
+//     }
+//     if (taskItem) {
+//       taskItem.remove();
+//     }
+//   });
+// });
+
 document
   .querySelectorAll('.todo-list .item input[type="checkbox"]')
   .forEach((checkbox) => {
@@ -73,6 +88,19 @@ document.querySelectorAll('.todo-list .item .edit').forEach((button) => {
     editTask(taskItem);
   });
 });
+
+// Alternate way to find the task item
+// document.querySelectorAll('.todo-list .item .edit').forEach((button) => {
+//   button.addEventListener('click', (event) => {
+//     let taskItem = button.parentNode; // Start with the button's parent
+//     while (taskItem && taskItem.tagName !== 'LI') {
+//       taskItem = taskItem.parentNode; // Traverse up until the <li> element is found
+//     }
+//     if (taskItem) {
+//       editTask(taskItem);
+//     }
+//   });
+// });
 
 const editTask = (taskItem) => {
   isEditMode = true;
