@@ -491,40 +491,51 @@ let person = {
   age: 32,
 };
 
-let player = person; // Assignment
+// CASE-01
+// Assign reference value
+let player = person; // Object assignment to a pointer
 
-console.log('Before any change:');
+console.log('After Pointing to an object:');
 console.log(person); // Output: { name: 'Sakib', age: 32 }
 console.log(player); // Output: { name: 'Sakib', age: 32 }
 
-// After any change
+// CASE-02
+// After any change / mutation
 player.name = 'Tamim';
 
-console.log('After any change:');
+console.log('After any change / mutation:');
 console.log(person); // Output: { name: 'Tamim', age: 32 }
 console.log(player); // Output: { name: 'Tamim', age: 32 }
 
-// Update or modify or mutate or change
+// CASE-03
+// Assign with value
 person = {};
 
-console.log('After mutation:');
+console.log('After new value assignment:');
 console.log(person); // Output: {}
 console.log(player); // Output: { name: 'Tamim', age: 32 }
 ```
 
-- _Note:_ After assignment of reference values, two reference values will be pointing to the same untill further assignment
+- _Note:_ After assignment of reference values, two reference values will be pointing to the same untill further assignment (CASE-01)
 - _Example: 02_
 
 ```js
 let player = ['Sakib', 'Tamim'];
+
+// CASE-01
+// Assign reference value
 let anotherPlayer = player; // Assignment
 
+// CASE-02
+// After any change / mutation
 player.push('Shanto');
 
 console.log('After first assignment:');
 console.log(player); // Output: [ 'Sakib', 'Tamim', 'Shanto' ]
 console.log(anotherPlayer); // Output: [ 'Sakib', 'Tamim', 'Shanto' ]
 
+// CASE-03
+// Assign with value
 player = [];
 
 console.log('After mutation:');
@@ -983,7 +994,7 @@ function multiply(a) {
   };
 }
 
-console.log(multiply(2)(3)(4)) // 24
+console.log(multiply(2)(3)(4)); // 24
 ```
 
 - Currying using arrow function
@@ -991,5 +1002,5 @@ console.log(multiply(2)(3)(4)) // 24
 ```js
 const multiply = (a) => (b) => (c) => a * b * c;
 
-console.log(multiply(2)(3)(4)) // 24
+console.log(multiply(2)(3)(4)); // 24
 ```
